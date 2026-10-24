@@ -53,13 +53,13 @@ function print(flags, value, human) {
 }
 
 const shotLine = (s, i) =>
-  `${String(i + 1).padStart(2)}. [${s.score ?? '?'}/10] ${s.type.padEnd(5)} ${s.shows || s.title}\n     ${s.delivery === 'direct' ? s.url : `${s.cut_command}`}\n     ${s.license.name}${s.license.attribution ? ` | credit: ${s.license.attribution}` : ''}`;
+  `${String(i + 1).padStart(2)}. [${s.score ?? '?'}/10] ${s.type.padEnd(5)} ${s.shows || s.title}\n     ${s.delivery === 'direct' ? (s.download_url ?? s.url) : `${s.cut_command}`}\n     ${s.license.name}${s.license.attribution ? ` | credit: ${s.license.attribution}` : ''}`;
 
 async function makeFile(shot, flags) {
   if (shot.delivery === 'local_capture') return capture(shot.url, { duration: Number(flags.duration ?? 5), out: flags.out });
   if (shot.type === 'video')
     return cut(shot.url, { start: seconds(flags.start ?? 0), duration: Number(flags.duration ?? 4), out: flags.out, aspect: flags.aspect, fit: flags.fit });
-  return download(shot.url, { out: flags.out });
+  return download(shot.download_url ?? shot.url, { out: flags.out });
 }
 
 async function readScript(arg) {

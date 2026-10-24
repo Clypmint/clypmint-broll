@@ -36,13 +36,13 @@ On 69 real subjects named in Clypmint customer edits, it found a shot scoring 7+
 1. **Plan.** Send the subject and, ideally, the line it plays over. The line decides which "Claude" or "Apple" you mean.
 2. **Find.** We look up what the name means (Wikidata), then search sources that publish for reuse: Wikimedia Commons, NASA, Internet Archive public-domain film, the subject's own website and its official YouTube channel.
 3. **Check.** One vision call scores every candidate against what the shot must show. Wrong person, watermark, collage, book cover: dropped.
-4. **Drop it in.** Each shot is a download URL, or one command that cuts the clip or records the live site on your machine.
+4. **Drop it in.** Each image has a `download_url` at a working size (at most 1920 px). Each video has one command that cuts just the seconds you need, or records the live site, on your machine.
 
 ## Use it
 
 ### MCP (Claude Code, Cursor, Codex, any MCP client)
 
-Server: `https://clypmint.com/mcp/broll` · tools: `find_broll`, `plan_broll`, `broll_usage`
+Server: `https://clypmint.com/mcp/broll` · tools: `find_broll`, `plan_broll`, `broll_usage` · listed on the official MCP registry as `com.clypmint/broll`
 
 <details><summary>Cursor (<code>~/.cursor/mcp.json</code>)</summary>
 
@@ -149,6 +149,23 @@ import { createClient } from '@clypmint/broll';
 const broll = createClient(); // reads CLYPMINT_API_KEY
 const { results } = await broll.search({ query: 'Figma', context: 'we design everything in Figma' });
 ```
+
+### Python
+
+```bash
+pip install "git+https://github.com/nuttallp/clypmint-broll#subdirectory=python"
+```
+
+```python
+from clypmint_broll import Broll
+
+broll = Broll()  # reads CLYPMINT_API_KEY
+shots = broll.search("Eiffel Tower", type="video")["results"]
+```
+
+### OpenAPI
+
+[`https://clypmint.com/api/v1/broll/openapi.json`](https://clypmint.com/api/v1/broll/openapi.json): import it into Postman or Insomnia, or generate a client in any language.
 
 ### CLI
 
