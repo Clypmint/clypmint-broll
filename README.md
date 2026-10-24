@@ -1,5 +1,7 @@
 # Clypmint B-Roll
 
+![Clypmint B-Roll: real, verified b-roll for agents](banner.jpg)
+
 **B-roll for agents.** One call returns real photos and footage of exactly what your script says: the person, the company, the app, the place, the moment. Every shot is checked by a vision model, scored 0-10, and labelled with its license.
 
 ```bash
