@@ -1,0 +1,47 @@
+{
+  "name": "@clypmint/broll",
+  "version": "1.0.0",
+  "description": "Real, verified b-roll for video agents: the Clypmint B-Roll API client, MCP setup, and a CLI that cuts clips and records live sites on your machine.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://clypmint.com/broll",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuttallp/clypmint-broll.git"
+  },
+  "bugs": "https://github.com/nuttallp/clypmint-broll/issues",
+  "keywords": [
+    "b-roll",
+    "broll",
+    "video",
+    "agents",
+    "mcp",
+    "ai-video",
+    "stock-footage",
+    "api",
+    "claude",
+    "cursor",
+    "codex"
+  ],
+  "bin": {
+    "clypmint-broll": "bin/clypmint-broll.mjs"
+  },
+  "exports": {
+    ".": "./src/client.mjs",
+    "./media": "./src/media.mjs",
+    "./capture": "./src/capture.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/*.test.mjs"
+  }
+}
