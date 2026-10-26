@@ -1,0 +1,428 @@
+{
+ "name": "B-Roll Bench v1",
+ "date": "2026-10-25",
+ "requests": 100,
+ "judges": [
+  {
+   "id": "gemini",
+   "label": "Gemini 3.5 Flash (Google)"
+  },
+  {
+   "id": "claude",
+   "label": "Claude Sonnet 5.5 (Anthropic)"
+  }
+ ],
+ "judge_agreement": 88.2,
+ "providers": [
+  {
+   "id": "clypmint-web",
+   "name": "Clypmint, web mode",
+   "price": "$60",
+   "rights": "Marked not cleared",
+   "ours": true
+  },
+  {
+   "id": "clypmint-licensed",
+   "name": "Clypmint, licensed",
+   "price": "$20",
+   "rights": "Licensed, with credit line",
+   "ours": true
+  },
+  {
+   "id": "commons",
+   "name": "Wikimedia Commons search",
+   "price": "Free",
+   "rights": "Licensed",
+   "ours": false
+  },
+  {
+   "id": "brave",
+   "name": "Brave image search",
+   "price": "$5",
+   "rights": "No license data",
+   "ours": false
+  },
+  {
+   "id": "openverse",
+   "name": "Openverse",
+   "price": "Free",
+   "rights": "Licensed",
+   "ours": false
+  },
+  {
+   "id": "pexels",
+   "name": "Pexels",
+   "price": "Free",
+   "rights": "Stock license",
+   "ours": false
+  }
+ ],
+ "sets": [
+  {
+   "id": "subjects",
+   "title": "Named subjects",
+   "n": 85,
+   "rows": {
+    "clypmint-web": {
+     "first": {
+      "gemini": 70.6,
+      "claude": 56.5,
+      "mean": 63.6
+     },
+     "top5": {
+      "gemini": 81.2,
+      "claude": 75.3,
+      "mean": 78.3
+     },
+     "median_s": 7,
+     "empty": 0
+    },
+    "clypmint-licensed": {
+     "first": {
+      "gemini": 47.1,
+      "claude": 41.2,
+      "mean": 44.2
+     },
+     "top5": {
+      "gemini": 52.9,
+      "claude": 45.9,
+      "mean": 49.4
+     },
+     "median_s": 5,
+     "empty": 0
+    },
+    "commons": {
+     "first": {
+      "gemini": 10.6,
+      "claude": 9.4,
+      "mean": 10
+     },
+     "top5": {
+      "gemini": 11.8,
+      "claude": 11.8,
+      "mean": 11.8
+     },
+     "median_s": 0.4,
+     "empty": 82.4
+    },
+    "brave": {
+     "first": {
+      "gemini": 44.7,
+      "claude": 44.7,
+      "mean": 44.7
+     },
+     "top5": {
+      "gemini": 75.3,
+      "claude": 74.1,
+      "mean": 74.7
+     },
+     "median_s": 0.7,
+     "empty": 0
+    },
+    "openverse": {
+     "first": {
+      "gemini": 7.1,
+      "claude": 7.1,
+      "mean": 7.1
+     },
+     "top5": {
+      "gemini": 9.4,
+      "claude": 8.2,
+      "mean": 8.8
+     },
+     "median_s": 1.9,
+     "empty": 77.6
+    },
+    "pexels": {
+     "first": {
+      "gemini": 21.2,
+      "claude": 24.7,
+      "mean": 23
+     },
+     "top5": {
+      "gemini": 34.1,
+      "claude": 32.9,
+      "mean": 33.5
+     },
+     "median_s": 0.4,
+     "empty": 0
+    }
+   }
+  },
+  {
+   "id": "scenes",
+   "title": "Movie and TV scenes",
+   "n": 15,
+   "rows": {
+    "clypmint-web": {
+     "first": {
+      "gemini": 60,
+      "claude": 53.3,
+      "mean": 56.7
+     },
+     "top5": {
+      "gemini": 73.3,
+      "claude": 60,
+      "mean": 66.7
+     },
+     "median_s": 7,
+     "empty": 6.7
+    },
+    "clypmint-licensed": {
+     "first": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "top5": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "median_s": 4.3,
+     "empty": 6.7
+    },
+    "commons": {
+     "first": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "top5": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "median_s": 0.4,
+     "empty": 100
+    },
+    "brave": {
+     "first": {
+      "gemini": 53.3,
+      "claude": 46.7,
+      "mean": 50
+     },
+     "top5": {
+      "gemini": 80,
+      "claude": 66.7,
+      "mean": 73.4
+     },
+     "median_s": 0.6,
+     "empty": 0
+    },
+    "openverse": {
+     "first": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "top5": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "median_s": 1.5,
+     "empty": 100
+    },
+    "pexels": {
+     "first": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "top5": {
+      "gemini": 0,
+      "claude": 0,
+      "mean": 0
+     },
+     "median_s": 0.4,
+     "empty": 0
+    }
+   }
+  },
+  {
+   "id": "all",
+   "title": "All 100 requests",
+   "n": 100,
+   "rows": {
+    "clypmint-web": {
+     "first": {
+      "gemini": 69,
+      "claude": 56,
+      "mean": 62.5
+     },
+     "top5": {
+      "gemini": 80,
+      "claude": 73,
+      "mean": 76.5
+     },
+     "median_s": 7,
+     "empty": 1
+    },
+    "clypmint-licensed": {
+     "first": {
+      "gemini": 40,
+      "claude": 35,
+      "mean": 37.5
+     },
+     "top5": {
+      "gemini": 45,
+      "claude": 39,
+      "mean": 42
+     },
+     "median_s": 4.9,
+     "empty": 1
+    },
+    "commons": {
+     "first": {
+      "gemini": 9,
+      "claude": 8,
+      "mean": 8.5
+     },
+     "top5": {
+      "gemini": 10,
+      "claude": 10,
+      "mean": 10
+     },
+     "median_s": 0.4,
+     "empty": 85
+    },
+    "brave": {
+     "first": {
+      "gemini": 46,
+      "claude": 45,
+      "mean": 45.5
+     },
+     "top5": {
+      "gemini": 76,
+      "claude": 73,
+      "mean": 74.5
+     },
+     "median_s": 0.7,
+     "empty": 0
+    },
+    "openverse": {
+     "first": {
+      "gemini": 6,
+      "claude": 6,
+      "mean": 6
+     },
+     "top5": {
+      "gemini": 8,
+      "claude": 7,
+      "mean": 7.5
+     },
+     "median_s": 1.8,
+     "empty": 81
+    },
+    "pexels": {
+     "first": {
+      "gemini": 18,
+      "claude": 21,
+      "mean": 19.5
+     },
+     "top5": {
+      "gemini": 29,
+      "claude": 28,
+      "mean": 28.5
+     },
+     "median_s": 0.4,
+     "empty": 0
+    }
+   }
+  }
+ ],
+ "categories": [
+  {
+   "id": "person",
+   "label": "People",
+   "n": 15,
+   "first": {
+    "clypmint-web": 53.4,
+    "clypmint-licensed": 26.7,
+    "commons": 3.4,
+    "brave": 46.7,
+    "openverse": 0,
+    "pexels": 0
+   }
+  },
+  {
+   "id": "company_product",
+   "label": "Companies and products",
+   "n": 15,
+   "first": {
+    "clypmint-web": 53.4,
+    "clypmint-licensed": 23.4,
+    "commons": 0,
+    "brave": 30,
+    "openverse": 3.4,
+    "pexels": 30
+   }
+  },
+  {
+   "id": "place",
+   "label": "Places",
+   "n": 15,
+   "first": {
+    "clypmint-web": 76.7,
+    "clypmint-licensed": 70,
+    "commons": 6.7,
+    "brave": 60,
+    "openverse": 26.7,
+    "pexels": 63.4
+   }
+  },
+  {
+   "id": "event",
+   "label": "Events",
+   "n": 15,
+   "first": {
+    "clypmint-web": 76.7,
+    "clypmint-licensed": 56.7,
+    "commons": 23.4,
+    "brave": 50,
+    "openverse": 0,
+    "pexels": 0
+   }
+  },
+  {
+   "id": "archival",
+   "label": "Archival footage",
+   "n": 10,
+   "first": {
+    "clypmint-web": 70,
+    "clypmint-licensed": 50,
+    "commons": 30,
+    "brave": 65,
+    "openverse": 10,
+    "pexels": 0
+   }
+  },
+  {
+   "id": "generic_scene",
+   "label": "Generic scenes",
+   "n": 15,
+   "first": {
+    "clypmint-web": 53.4,
+    "clypmint-licensed": 40,
+    "commons": 3.4,
+    "brave": 23.3,
+    "openverse": 3.4,
+    "pexels": 36.7
+   }
+  },
+  {
+   "id": "movie_tv_scene",
+   "label": "Movie and TV scenes",
+   "n": 15,
+   "first": {
+    "clypmint-web": 56.7,
+    "clypmint-licensed": 0,
+    "commons": 0,
+    "brave": 50,
+    "openverse": 0,
+    "pexels": 0
+   }
+  }
+ ]
+}

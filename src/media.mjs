@@ -6,7 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-const UA = 'clypmint-broll-cli/1.0 (+https://github.com/nuttallp/clypmint-broll)';
+const UA = 'clypmint-broll-cli/1.1 (+https://github.com/Clypmint/clypmint-broll)';
 
 export class MediaError extends Error {}
 

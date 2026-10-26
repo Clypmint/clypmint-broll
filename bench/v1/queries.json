@@ -1,0 +1,602 @@
+[
+ {
+  "id": "pe01",
+  "type": "person",
+  "query": "steve jobs presenting original iphone on stage",
+  "subject": "Steve Jobs holding and demonstrating the first iPhone on stage at Macworld 2007."
+ },
+ {
+  "id": "pe02",
+  "type": "person",
+  "query": "marie curie working in laboratory vintage footage",
+  "subject": "Marie Curie conducting scientific research inside her Paris laboratory."
+ },
+ {
+  "id": "pe03",
+  "type": "person",
+  "query": "serena williams serving tennis match archival hd",
+  "subject": "Serena Williams executing a serve during a professional tennis tournament."
+ },
+ {
+  "id": "pe04",
+  "type": "person",
+  "query": "satya nadella speaking at microsoft developer conference",
+  "subject": "Satya Nadella delivering a keynote speech at a Microsoft event."
+ },
+ {
+  "id": "pe05",
+  "type": "person",
+  "query": "jean michel basquiat painting studio 1980s footage",
+  "subject": "Jean-Michel Basquiat working on a canvas inside his New York art studio."
+ },
+ {
+  "id": "pe06",
+  "type": "person",
+  "query": "nelson mandela waving to crowd after release",
+  "subject": "Nelson Mandela smiling and waving to supporters following his release from prison in 1990."
+ },
+ {
+  "id": "pe07",
+  "type": "person",
+  "query": "melanie perkins founder present canva stage Sydney",
+  "subject": "Melanie Perkins presenting on stage at a tech startup conference."
+ },
+ {
+  "id": "pe08",
+  "type": "person",
+  "query": "richard feynman lecturing physics blackboard caltech",
+  "subject": "Richard Feynman writing equations and gesturing at a blackboard during a university lecture."
+ },
+ {
+  "id": "pe09",
+  "type": "person",
+  "query": "shohei ohtani batting pitching angels dodgers mlb",
+  "subject": "Shohei Ohtani hitting a baseball during a Major League Baseball game."
+ },
+ {
+  "id": "pe10",
+  "type": "person",
+  "query": "indo sara founder boba guys making tea",
+  "subject": "Andrew Chau or Bin Chen preparing handcrafted boba tea in a shop."
+ },
+ {
+  "id": "pe11",
+  "type": "person",
+  "query": "frida kahlo sitting easel painting outdoor courtyard",
+  "subject": "Frida Kahlo seated outdoors at an easel while painting."
+ },
+ {
+  "id": "pe12",
+  "type": "person",
+  "query": "lee kuan yew speaking press conference singapore",
+  "subject": "Lee Kuan Yew addressing reporters at an official press conference."
+ },
+ {
+  "id": "pe13",
+  "type": "person",
+  "query": "Jensen huang nvidia CEO wearing leather jacket keynote",
+  "subject": "Jensen Huang delivering a tech keynote speech while wearing a black leather jacket."
+ },
+ {
+  "id": "pe14",
+  "type": "person",
+  "query": "dr gabor mate talking clinical seminar workshop",
+  "subject": "Dr. Gabor Maté speaking to an audience at a teaching workshop."
+ },
+ {
+  "id": "pe15",
+  "type": "person",
+  "query": "indira gandhi walking walking international diplomats 1970s",
+  "subject": "Indira Gandhi walking alongside foreign diplomats during an official state visit."
+ },
+ {
+  "id": "co01",
+  "type": "company_product",
+  "query": "stripe dashboard payment processing screen closeup",
+  "subject": "A closeup of the Stripe online payment dashboard showing transaction data"
+ },
+ {
+  "id": "co02",
+  "type": "company_product",
+  "query": "duolingo app owl logo smartphone screen 2020s",
+  "subject": "The Duolingo green owl logo displayed on a smartphone screen"
+ },
+ {
+  "id": "co03",
+  "type": "company_product",
+  "query": "nokia 3310 mobile phone hands typing 2000s",
+  "subject": "A person typing a message on a classic Nokia 3310 phone"
+ },
+ {
+  "id": "co04",
+  "type": "company_product",
+  "query": "sony walkman cassette player on table 1980s",
+  "subject": "A vintage Sony Walkman personal cassette player sitting on a surface"
+ },
+ {
+  "id": "co05",
+  "type": "company_product",
+  "query": "spotify desktop app music playlist interface",
+  "subject": "The Spotify desktop application user interface playing music"
+ },
+ {
+  "id": "co06",
+  "type": "company_product",
+  "query": "bmw munich headquarters four cylinder building exterior",
+  "subject": "The exterior of the iconic BMW headquarters building in Munich, Germany"
+ },
+ {
+  "id": "co07",
+  "type": "company_product",
+  "query": "shopee delivery driver scooter Southeast Asia city",
+  "subject": "A Shopee courier riding an orange delivery scooter through city streets"
+ },
+ {
+  "id": "co08",
+  "type": "company_product",
+  "query": "canva design editor screen laptop working",
+  "subject": "A laptop user creating a graphic project inside the Canva interface"
+ },
+ {
+  "id": "co09",
+  "type": "company_product",
+  "query": "lego store wall of colorful bricks storefront",
+  "subject": "Inside a LEGO brand retail store showing walls filled with plastic bricks"
+ },
+ {
+  "id": "co10",
+  "type": "company_product",
+  "query": "klarna buy now pay later checkout screen",
+  "subject": "An e-commerce checkout page highlighting the Klarna payment option"
+ },
+ {
+  "id": "co11",
+  "type": "company_product",
+  "query": "blockbuster video rental store interior aisle 1990s",
+  "subject": "Inside a classic Blockbuster Video store with VHS tapes on shelves"
+ },
+ {
+  "id": "co12",
+  "type": "company_product",
+  "query": "figma collaborative design file live cursor movement",
+  "subject": "A screen recording of multiple user cursors moving in a Figma design file"
+ },
+ {
+  "id": "co13",
+  "type": "company_product",
+  "query": "nintendo game boy classic handheld console gameplay",
+  "subject": "Hands playing a game on an original monochrome Nintendo Game Boy"
+ },
+ {
+  "id": "co14",
+  "type": "company_product",
+  "query": "monzo bright pink coral debit card payment",
+  "subject": "A customer using a hot pink Monzo contactless debit card at a card reader"
+ },
+ {
+  "id": "co15",
+  "type": "company_product",
+  "query": "notion app workspace note taking desktop screen",
+  "subject": "A user organizing notes and tasks within the Notion desktop app interface"
+ },
+ {
+  "id": "pl01",
+  "type": "place",
+  "query": "Shibuya Crossing Tokyo crowded aerial night drone",
+  "subject": "A high-angle or drone view of the crowded Shibuya Crossing in Tokyo illuminated at night."
+ },
+ {
+  "id": "pl02",
+  "type": "place",
+  "query": "Brooklyn Bridge New York City sunset timelapse",
+  "subject": "A timelapse shot of traffic and pedestrians on the Brooklyn Bridge in New York during sunset."
+ },
+ {
+  "id": "pl03",
+  "type": "place",
+  "query": "Table Mountain Cape Town morning fog clouds",
+  "subject": "Table Mountain in Cape Town with morning clouds rolling over its flat top."
+ },
+ {
+  "id": "pl04",
+  "type": "place",
+  "query": "Brandenburg Gate Berlin Germany daytime pedestrians walk",
+  "subject": "People walking in front of the historic Brandenburg Gate in Berlin on a sunny day."
+ },
+ {
+  "id": "pl05",
+  "type": "place",
+  "query": "Marina Bay Sands Singapore skyline illuminated night",
+  "subject": "The modern Singapore skyline featuring the illuminated Marina Bay Sands building at night."
+ },
+ {
+  "id": "pl06",
+  "type": "place",
+  "query": "Rialto Bridge Grand Canal Venice gondola passing",
+  "subject": "A Venetian gondola passing beneath the iconic Rialto Bridge on the Grand Canal."
+ },
+ {
+  "id": "pl07",
+  "type": "place",
+  "query": "Sydney Opera House harbor view sunny day",
+  "subject": "A clear daytime view of the Sydney Opera House situated on the harbor."
+ },
+ {
+  "id": "pl08",
+  "type": "place",
+  "query": "Eiffel Tower Paris vintage 1970s street view",
+  "subject": "Archival or vintage-style footage of the Eiffel Tower viewed from a Paris street."
+ },
+ {
+  "id": "pl09",
+  "type": "place",
+  "query": "Old Havana Cuba vintage cars Capitolio building",
+  "subject": "Classic 1950s American cars driving past El Capitolio in Old Havana, Cuba."
+ },
+ {
+  "id": "pl10",
+  "type": "place",
+  "query": "CN Tower Toronto skyline Lake Ontario reflection",
+  "subject": "The Toronto skyline and CN Tower reflected in the water of Lake Ontario."
+ },
+ {
+  "id": "pl11",
+  "type": "place",
+  "query": "Arc de Triomphe Paris traffic circle daytime",
+  "subject": "Vehicles navigating the busy roundabout surrounding the Arc de Triomphe in Paris."
+ },
+ {
+  "id": "pl12",
+  "type": "place",
+  "query": "Hollywood Boulevard Walk of Fame stars close up",
+  "subject": "A close-up camera movement over the star plaques on the Hollywood Walk of Fame sidewalk."
+ },
+ {
+  "id": "pl13",
+  "type": "place",
+  "query": "Santorini Greece Oia village blue domes ocean",
+  "subject": "The cliffside whitewashed buildings and blue-domed churches of Oia village in Santorini."
+ },
+ {
+  "id": "pl14",
+  "type": "place",
+  "query": "Burj Khalifa Dubai fog skyscrapers ground view",
+  "subject": "A low-angle shot looking up at the Burj Khalifa rising above a layer of low fog."
+ },
+ {
+  "id": "pl15",
+  "type": "place",
+  "query": "Golden Gate Bridge San Francisco fog slow motion",
+  "subject": "The red towers of the Golden Gate Bridge shrouded in rolling San Francisco fog."
+ },
+ {
+  "id": "ev01",
+  "type": "event",
+  "query": "Apollo 11 Saturn V rocket launch 1969 Cape Canaveral",
+  "subject": "The Apollo 11 rocket lifting off from the launchpad in 1969."
+ },
+ {
+  "id": "ev02",
+  "type": "event",
+  "query": "Fall of the Berlin Wall November 1989 crowd cheering",
+  "subject": "People standing on and celebrating at the Berlin Wall as it is dismantled in 1989."
+ },
+ {
+  "id": "ev03",
+  "type": "event",
+  "query": "Steve Jobs introduces first iPhone Macworld San Francisco 2007",
+  "subject": "Steve Jobs holding up the original iPhone on stage during his 2007 keynote address."
+ },
+ {
+  "id": "ev04",
+  "type": "event",
+  "query": "Tokyo 1964 Olympic Games opening ceremony stadium flame",
+  "subject": "The lighting of the Olympic cauldron during the 1964 Tokyo Summer Olympics."
+ },
+ {
+  "id": "ev05",
+  "type": "event",
+  "query": "Miracle on Ice USA hockey victory over USSR Lake Placid 1980",
+  "subject": "The US men's hockey team celebrating on the ice after beating the Soviets in 1980."
+ },
+ {
+  "id": "ev06",
+  "type": "event",
+  "query": "Hindenburg airship disaster explosion Lakehurst New Jersey 1937",
+  "subject": "The Hindenburg zeppelin catching fire and collapsing to the ground in 1937."
+ },
+ {
+  "id": "ev07",
+  "type": "event",
+  "query": "Nelson Mandela walks free from Victor Verster prison 1990",
+  "subject": "Nelson Mandela walking hand-in-hand with Winnie Mandela upon his release in 1990."
+ },
+ {
+  "id": "ev08",
+  "type": "event",
+  "query": "Falcon Heavy inaugural launch Tesla Roadster in space SpaceX 2018",
+  "subject": "The 2018 SpaceX Falcon Heavy rocket launch carrying a red sports car."
+ },
+ {
+  "id": "ev09",
+  "type": "event",
+  "query": "Everest first summit Tenzing Norgay Edmund Hillary 1953 expedition",
+  "subject": "Climbers navigating icefalls during the successful 1953 British Mount Everest expedition."
+ },
+ {
+  "id": "ev10",
+  "type": "event",
+  "query": "Deep Blue defeats Garry Kasparov chess match New York 1997",
+  "subject": "Garry Kasparov sitting at a chessboard playing against IBM's Deep Blue supercomputer in 1997."
+ },
+ {
+  "id": "ev11",
+  "type": "event",
+  "query": "Sinking of the Costa Concordia cruise ship Tuscany coast 2012",
+  "subject": "The capsized Costa Concordia ship lying on its side near the shore of Giglio Island in 2012."
+ },
+ {
+  "id": "ev12",
+  "type": "event",
+  "query": "Barack Obama election night victory speech Grant Park Chicago 2008",
+  "subject": "Barack Obama addressing a massive crowd in Chicago after winning the 2008 presidential election."
+ },
+ {
+  "id": "ev13",
+  "type": "event",
+  "query": "CERN Large Hadron Collider particle physics tunnel Geneva 2008",
+  "subject": "The underground particle accelerator tube inside the Large Hadron Collider facility."
+ },
+ {
+  "id": "ev14",
+  "type": "event",
+  "query": "Diego Maradona Hand of God goal Argentina England World Cup 1986",
+  "subject": "Diego Maradona punching the ball past the English goalkeeper during the 1986 World Cup."
+ },
+ {
+  "id": "ev15",
+  "type": "event",
+  "query": "33 Chilean miners rescue Phoenix capsule Atacama desert 2010",
+  "subject": "The Phoenix rescue capsule emerging from the drill hole bringing up trapped miners in Chile in 2010."
+ },
+ {
+  "id": "ar01",
+  "type": "archival",
+  "query": "Ford Model T assembly line Detroit 1910s",
+  "subject": "Historical black and white footage of workers assembling Ford Model T automobiles on an early moving conveyor belt."
+ },
+ {
+  "id": "ar02",
+  "type": "archival",
+  "query": "Wright brothers first flight Kitty Hawk 1903",
+  "subject": "Photograph or vintage footage of the Wright Flyer taking off in North Carolina with Orville Wright piloting."
+ },
+ {
+  "id": "ar03",
+  "type": "archival",
+  "query": "Apollo 11 Saturn V rocket launch 1969",
+  "subject": "Color archival footage of the Saturn V rocket blasting off from the launchpad during the NASA moon mission."
+ },
+ {
+  "id": "ar04",
+  "type": "archival",
+  "query": "Lumiere brothers Workers Leaving the Factory 1895",
+  "subject": "Early silent film footage showing crowd of employees exiting the Lumiere camera factory in Lyon France."
+ },
+ {
+  "id": "ar05",
+  "type": "archival",
+  "query": "Alexander Graham Bell first telephone demonstration 1870s",
+  "subject": "Historical archival photo or illustration of Alexander Graham Bell speaking into his early telephone prototype."
+ },
+ {
+  "id": "ar06",
+  "type": "archival",
+  "query": "Bauhaus design school workshop Weimar 1920s",
+  "subject": "Black and white photograph of students and instructors working in a modernist industrial design studio in Germany."
+ },
+ {
+  "id": "ar07",
+  "type": "archival",
+  "query": "Early ENIAC computer operators Philadelphia 1940s",
+  "subject": "Vintage photo of female programmers plugging cables into the massive ENIAC vacuum-tube electronic computer."
+ },
+ {
+  "id": "ar08",
+  "type": "archival",
+  "query": "First television broadcast BBC Alexandra Palace 1930s",
+  "subject": "Archival image or early footage of vintage television studio equipment and performers in London."
+ },
+ {
+  "id": "ar09",
+  "type": "archival",
+  "query": "First modern Olympic games Athens opening 1896",
+  "subject": "Historical photo of the Panathenaic Stadium filled with spectators for the 1896 Olympic Games."
+ },
+ {
+  "id": "ar10",
+  "type": "archival",
+  "query": "Gutenberg printing press vintage reconstruction metal type",
+  "subject": "Close-up archival footage or photo of a movable type wooden printing press operation."
+ },
+ {
+  "id": "ge01",
+  "type": "generic_scene",
+  "query": "crowd cheering at wooden stage 1960s outdoors",
+  "subject": "A massive crowd standing in a muddy field watching a concert on an outdoor wooden stage in the late 1960s."
+ },
+ {
+  "id": "ge02",
+  "type": "generic_scene",
+  "query": "steam locomotive moving through snowy countryside historical",
+  "subject": "A steam-powered train traveling through a snow-covered rural landscape."
+ },
+ {
+  "id": "ge03",
+  "type": "generic_scene",
+  "query": "scientists working in cleanroom laboratory modern technology",
+  "subject": "Researchers wearing full white protective suits working with equipment inside a high-tech cleanroom laboratory."
+ },
+ {
+  "id": "ge04",
+  "type": "generic_scene",
+  "query": "traditional night market food stalls taiwan colorful lights",
+  "subject": "Pedestrians walking past illuminated food stalls at a busy outdoor night market in Taiwan."
+ },
+ {
+  "id": "ge05",
+  "type": "generic_scene",
+  "query": "early computer operator mounting magnetic tape reel 1970s",
+  "subject": "A person loading a large magnetic tape reel onto a mainframe computer system in a 1970s server room."
+ },
+ {
+  "id": "ge06",
+  "type": "generic_scene",
+  "query": "dockworkers unloading cargo ship vintage black and white",
+  "subject": "Dockworkers manually moving crates off a docked cargo ship in a mid-20th-century harbor."
+ },
+ {
+  "id": "ge07",
+  "type": "generic_scene",
+  "query": "high school students in chemistry lab 1980s retro",
+  "subject": "Teenagers wearing 1980s fashion using glass beakers and Bunsen burners during a science class."
+ },
+ {
+  "id": "ge08",
+  "type": "generic_scene",
+  "query": "wall street traders shouting on trading floor vintage",
+  "subject": "Financial traders in jackets holding papers and gesturing wildly on a crowded stock exchange floor."
+ },
+ {
+  "id": "ge09",
+  "type": "generic_scene",
+  "query": "artisan weaving rug on traditional wooden loom morocco",
+  "subject": "A weaver manually operating a vertical wooden loom to make a patterned textile."
+ },
+ {
+  "id": "ge10",
+  "type": "generic_scene",
+  "query": "astronaut performing spacewalk in earth orbit cinematic",
+  "subject": "An astronaut floating in microgravity outside a space station with Earth visible in the background."
+ },
+ {
+  "id": "ge11",
+  "type": "generic_scene",
+  "query": "architect reviewing blueprint on construction site sunset",
+  "subject": "A person wearing a hard hat holding open a large paper building plan at a building project site."
+ },
+ {
+  "id": "ge12",
+  "type": "generic_scene",
+  "query": "jazz band performing in dim club 1950s style",
+  "subject": "A brass section and pianist playing instruments on a small stage in a dimly lit venue."
+ },
+ {
+  "id": "ge13",
+  "type": "generic_scene",
+  "query": "farmer inspecting wheat field at sunrise agricultural",
+  "subject": "A farmer walking through a field of golden wheat touching the crops early in the morning."
+ },
+ {
+  "id": "ge14",
+  "type": "generic_scene",
+  "query": "assembly line workers building vintage automobile 1920s",
+  "subject": "Factory workers fitting parts onto early model car chassis on an industrial conveyor belt."
+ },
+ {
+  "id": "ge15",
+  "type": "generic_scene",
+  "query": "group of friends playing arcade video games 1990s",
+  "subject": "Young people standing in front of glowing arcade cabinets playing games in a dark room."
+ },
+ {
+  "id": "mo01",
+  "type": "movie_tv_scene",
+  "query": "The Wolf of Wall Street Matthew McConaughey chest thumping scene",
+  "subject": "Matthew McConaughey thumping his chest and humming at a restaurant table with Leonardo DiCaprio."
+ },
+ {
+  "id": "mo02",
+  "type": "movie_tv_scene",
+  "query": "Succession Kendall Roy staring at ocean silence scene",
+  "subject": "Jeremy Strong as Kendall Roy sitting alone on a bench staring blankly at the ocean."
+ },
+ {
+  "id": "mo03",
+  "type": "movie_tv_scene",
+  "query": "The Office Michael Scott screaming no no god please no",
+  "subject": "Steve Carell as Michael Scott shouting in anguish upon seeing Toby return to the office."
+ },
+ {
+  "id": "mo04",
+  "type": "movie_tv_scene",
+  "query": "Squid Game tug of war strategy scene",
+  "subject": "Player 001 explaining the tactical trick to win the tug-of-war game on the high platform."
+ },
+ {
+  "id": "mo05",
+  "type": "movie_tv_scene",
+  "query": "Matrix Morpheus red pill blue pill choice scene",
+  "subject": "Laurence Fishburne holding out a red pill in one hand and a blue pill in the other."
+ },
+ {
+  "id": "mo06",
+  "type": "movie_tv_scene",
+  "query": "The Social Network Mark Zuckerberg drops out Harvard rain scene",
+  "subject": "Jesse Eisenberg walking through the Harvard campus in a hoodie under the rain."
+ },
+ {
+  "id": "mo07",
+  "type": "movie_tv_scene",
+  "query": "Parasite Ki-taek basement stairs steak ramdon scene",
+  "subject": "Cho Yeo-jeong frantically eating a bowl of ramdon in her modern kitchen."
+ },
+ {
+  "id": "mo08",
+  "type": "movie_tv_scene",
+  "query": "Interstellar Cooper crying watching video messages scene",
+  "subject": "Matthew McConaughey weeping intensely while watching decades of missed family video transmissions."
+ },
+ {
+  "id": "mo09",
+  "type": "movie_tv_scene",
+  "query": "Devil Wears Prada Miranda Priestly cerulean sweater speech scene",
+  "subject": "Meryl Streep lecturing her assistant about the global fashion industry supply chain."
+ },
+ {
+  "id": "mo10",
+  "type": "movie_tv_scene",
+  "query": "Mad Men Don Draper The Carousel Kodak pitch scene",
+  "subject": "Jon Hamm presenting a photo slide deck about nostalgia in a dark boardroom."
+ },
+ {
+  "id": "mo11",
+  "type": "movie_tv_scene",
+  "query": "Moneyball Brad Pitt Peter Brand trade phone calls scene",
+  "subject": "Brad Pitt and Jonah Hill making aggressive player trade calls from their offices."
+ },
+ {
+  "id": "mo12",
+  "type": "movie_tv_scene",
+  "query": "La La Land Seb and Mia planetarium waltz scene",
+  "subject": "Ryan Gosling and Emma Stone dancing together floating among stars inside a planetarium."
+ },
+ {
+  "id": "mo13",
+  "type": "movie_tv_scene",
+  "query": "Amélie spoon cracking creme brulee scene",
+  "subject": "Audrey Tautou breaking the caramelized sugar crust of a crème brûlée with a spoon."
+ },
+ {
+  "id": "mo14",
+  "type": "movie_tv_scene",
+  "query": "Inception Cobb spinning top totem scene ending",
+  "subject": "A brass spinning top spinning on a wooden table without falling over."
+ },
+ {
+  "id": "mo15",
+  "type": "movie_tv_scene",
+  "query": "Ted Lasso Be Curious Not Judgemental dart game scene",
+  "subject": "Jason Sudeikis throwing a winning dart at a pub dartboard during a high-stakes game."
+ }
+]

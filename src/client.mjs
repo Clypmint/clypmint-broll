@@ -30,7 +30,7 @@ export function createClient({
         authorization: `Bearer ${apiKey}`,
         ...(body ? { 'content-type': 'application/json' } : {}),
         ...(idempotencyKey ? { 'idempotency-key': idempotencyKey } : {}),
-        'user-agent': 'clypmint-broll-js/1.0',
+        'user-agent': 'clypmint-broll-js/1.1',
       },
       body: body ? JSON.stringify(body) : undefined,
     });
@@ -57,7 +57,7 @@ export function createClient({
       const body = typeof input === 'string' ? { transcript: input } : input;
       return call('POST', '/api/v1/broll/plan', body, options);
     },
-    /** This month's searches, free searches left and billing. */
+    /** The prepaid balance, this month's spend, auto top-up and the prices. */
     usage() {
       return call('GET', '/api/v1/broll/usage');
     },

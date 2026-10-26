@@ -16,7 +16,7 @@ import { capture } from './capture.mjs';
 import { BrollError, createClient } from './client.mjs';
 import { cut, download, MediaError, seconds } from './media.mjs';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function parse(argv) {
   const args = [];
@@ -37,6 +37,7 @@ function parse(argv) {
 const HELP = `clypmint-broll ${VERSION}: real, verified b-roll for video agents (https://clypmint.com/broll)
 
   search <subject>        find shots   --context "<script line>" --type image|video|any --limit N --orientation portrait
+                          --rights any  also the open web (movie clips, news photos); shots are marked NOT cleared
   plan <file|->           b-roll for a whole script  --max-beats N --per-beat N
   get <subject>           search, then make the best shot's file  --type video --out file
   cut <url|file>          cut a clip   --start S --duration D [--end E] --aspect 9:16 --fit contain|cover --keep-audio
@@ -53,7 +54,7 @@ function print(flags, value, human) {
 }
 
 const shotLine = (s, i) =>
-  `${String(i + 1).padStart(2)}. [${s.score ?? '?'}/10] ${s.type.padEnd(5)} ${s.shows || s.title}\n     ${s.delivery === 'direct' ? (s.download_url ?? s.url) : `${s.cut_command}`}\n     ${s.license.name}${s.license.attribution ? ` | credit: ${s.license.attribution}` : ''}`;
+  `${String(i + 1).padStart(2)}. [${s.score ?? '?'}/10] ${s.type.padEnd(5)} ${s.license?.cleared === false ? 'NOT CLEARED ' : ''}${s.shows || s.title}\n     ${s.delivery === 'direct' ? (s.download_url ?? s.url) : `${s.cut_command}`}\n     ${s.license.name}${s.license.attribution ? ` | credit: ${s.license.attribution}` : ''}`;
 
 async function makeFile(shot, flags) {
   if (shot.delivery === 'local_capture') return capture(shot.url, { duration: Number(flags.duration ?? 5), out: flags.out });
@@ -88,6 +89,7 @@ export async function main(argv) {
       ...(flags.orientation ? { orientation: String(flags.orientation) } : {}),
       ...(flags.limit ? { limit: num(flags.limit) } : {}),
       ...(flags.minScore ? { min_score: num(flags.minScore) } : {}),
+      ...(flags.rights ? { rights: String(flags.rights) } : {}),
     });
     if (command === 'search')
       return print(flags, result, (r) =>
@@ -107,6 +109,7 @@ export async function main(argv) {
       transcript,
       ...(flags.maxBeats ? { max_beats: num(flags.maxBeats) } : {}),
       ...(flags.perBeat ? { results_per_beat: num(flags.perBeat) } : {}),
+      ...(flags.rights ? { rights: String(flags.rights) } : {}),
     });
     return print(flags, result, (r) =>
       r.beats
@@ -143,7 +146,7 @@ export async function main(argv) {
     return print(flags, await download(rest[0], { out: flags.out }), (m) => `${m.file}  ${m.bytes} bytes`);
   }
 
-  if (command === 'usage') return print(flags, await createClient().usage(), (u) => `${u.searches} searches this month, ${u.free_searches_left} free left, ${u.billed_searches} billed ($${u.billed_usd})`);
+  if (command === 'usage') return print(flags, await createClient().usage(), (u) => `balance $${Number(u.balance_usd).toFixed(2)}, $${Number(u.spent_usd_this_month).toFixed(2)} spent this month${u.auto_topup ? ', auto top-up on' : ''}; a licensed search $${u.price_usd?.licensed}, a web search $${u.price_usd?.web}${u.offer ? ` (${u.offer.label})` : ''}`);
 
   throw new MediaError(`Unknown command "${command}". Run clypmint-broll --help.`);
 }

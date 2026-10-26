@@ -1,3 +1,5 @@
 node_modules/
 *.mp4
 .DS_Store
+__pycache__/
+*.pyc
