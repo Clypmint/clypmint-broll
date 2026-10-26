@@ -28,3 +28,14 @@ test('the client sends the key and the body, and surfaces API errors', async () 
   assert.equal(calls[0].init.headers.authorization, 'Bearer cm_live_x');
   assert.deepEqual(JSON.parse(calls[0].init.body), { query: 'Sam Altman' });
 });
+
+test('search passes --rights through to the API body', async () => {
+  const calls = [];
+  const fetch = async (url, init) => {
+    calls.push(JSON.parse(init.body));
+    return new Response(JSON.stringify({ results: [] }), { status: 200 });
+  };
+  const client = createClient({ apiKey: 'cm_live_x', baseUrl: 'https://example.test', fetch });
+  await client.search({ query: 'Wolf of Wall Street', rights: 'any' });
+  assert.equal(calls[0].rights, 'any');
+});

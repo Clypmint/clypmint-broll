@@ -43,6 +43,12 @@ class ClientTest(unittest.TestCase):
         path, auth, key, body = Handler.seen[-1]
         self.assertEqual((path, auth, key, body), ("/api/v1/broll/search", "Bearer cm_live_x", "abc12345", {"query": "Sam Altman", "type": "image"}))
 
+    def test_rights_is_sent_only_when_given(self):
+        self.broll.search("Wolf of Wall Street", rights="any")
+        self.assertEqual(Handler.seen[-1][3], {"query": "Wolf of Wall Street", "rights": "any"})
+        self.broll.search("Sam Altman")
+        self.assertEqual(Handler.seen[-1][3], {"query": "Sam Altman"})
+
     def test_errors_carry_status_and_code(self):
         with self.assertRaises(BrollError) as caught:
             self.broll.search("broke")

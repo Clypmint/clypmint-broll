@@ -1,0 +1,43 @@
+{
+ "model": "gemini-3.5-flash",
+ "temperature": 0.7,
+ "written": "2026-10-25T23:21:29.405Z",
+ "categories": [
+  [
+   "person",
+   15,
+   "a real, named person (founders, CEOs, scientists, athletes, artists, politicians, historical figures)"
+  ],
+  [
+   "company_product",
+   15,
+   "a named company, product, app or brand (its product, logo, store, headquarters or the thing itself)"
+  ],
+  [
+   "place",
+   15,
+   "a named place or landmark (cities, buildings, natural wonders, streets)"
+  ],
+  [
+   "event",
+   15,
+   "a named historical or recent news event (launches, disasters, ceremonies, elections, sports moments)"
+  ],
+  [
+   "archival",
+   10,
+   "old or historical footage or photos of a named era, invention or early film"
+  ],
+  [
+   "generic_scene",
+   15,
+   "a generic, unnamed scene a creator needs as b-roll (an action, a mood, a setting, people doing something)"
+  ],
+  [
+   "movie_tv_scene",
+   15,
+   "one specific scene from a named film or TV show that creators clip for social posts (name the film or show and the scene)"
+  ]
+ ],
+ "prompt": "You help a video editor who makes short videos for founders, coaches and educators. Write {n} b-roll requests of this kind: {description}.\nWrite each the way an editor types it into a b-roll search (3 to 10 words). Mix very famous subjects with moderately known ones, and different countries and decades. No two about the same subject.\nFor each, also write \"subject\": one plain line saying exactly what a correct shot shows.\nReply JSON only: {\"requests\":[{\"query\":\"...\",\"subject\":\"...\"}]}"
+}

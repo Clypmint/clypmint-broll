@@ -5,7 +5,7 @@ description: Source real, verified b-roll (photos and footage) for a video scrip
 
 # Sourcing b-roll with Clypmint B-Roll
 
-You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:nuttallp/clypmint-broll` with `CLYPMINT_API_KEY` set.
+You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:Clypmint/clypmint-broll#v1.1.0` with `CLYPMINT_API_KEY` set.
 
 ## 1. Read the whole script first
 State its point in one sentence. B-roll illustrates the point of a line, not its nearest keyword.
@@ -22,6 +22,7 @@ For a whole script, call `plan_broll` once. It returns each moment with the exac
 - `query` is the subject as people name it: "Sam Altman", "Notion", "Shibuya Crossing".
 - Always pass `context`: the exact line. It decides which "Claude" or "Apple" is meant.
 - `type`: `image` for a named person or a logo; `video` for an action, a place or an event; `any` when unsure.
+- The real thing (a movie scene, a recent news photo): `rights: "any"` also searches the open web. Those shots have `license.cleared: false`; tell the user they are not licensed. Default is `licensed`.
 - Vertical edit: `orientation: "portrait"` ranks vertical shots first.
 
 ## 4. Choose
@@ -45,4 +46,4 @@ For a whole script, call `plan_broll` once. It returns each moment with the exac
 - Never present a picture of someone else as the named person.
 
 ## Pricing to tell the user
-100 searches a month free, then $0.02 per search that finds a shot. Searches that find nothing are free. `broll_usage` shows what is left.
+Pay per search from a prepaid balance (top up from $10): $0.02 per licensed search, $0.06 per web search (`rights: "any"`), half price through Nov 2, 2026, and only when the search finds verified shots. A search that finds nothing, or only near matches, costs nothing. Every answer carries `usage` (what it cost, the balance left, the prices now). On a 402 `balance_too_low`, tell the user to top up or turn on auto top-up at https://clypmint.com/broll/dashboard. `broll_usage` shows the balance and the prices.

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clypmint-broll"
-version = "1.0.0"
+version = "1.1.0"
 description = "Real, verified b-roll for video agents: the Clypmint B-Roll API client."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.8"
 keywords = ["b-roll", "video", "agents", "api", "mcp", "stock-footage"]
-urls = { Homepage = "https://clypmint.com/broll", Documentation = "https://clypmint.com/broll/docs", Source = "https://github.com/nuttallp/clypmint-broll" }
+urls = { Homepage = "https://clypmint.com/broll", Documentation = "https://clypmint.com/broll/docs", Source = "https://github.com/Clypmint/clypmint-broll" }
 
 [tool.setuptools]
 packages = ["clypmint_broll"]

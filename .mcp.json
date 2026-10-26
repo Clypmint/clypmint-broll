@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "clypmint-broll": {
+      "type": "http",
+      "url": "https://clypmint.com/mcp/broll",
+      "headers": { "Authorization": "Bearer ${user_config.api_key}" }
+    }
+  }
+}

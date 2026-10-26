@@ -1,0 +1,12 @@
+{
+  "name": "clypmint-broll",
+  "description": "Clypmint B-Roll: real, verified footage for any agent",
+  "owner": { "name": "Clypmint", "email": "support@clypmint.com" },
+  "plugins": [
+    {
+      "name": "clypmint-broll",
+      "source": "./",
+      "description": "Real, verified b-roll for any video your agent makes: find_broll and plan_broll over MCP, and a skill that sources, places and credits each shot."
+    }
+  ]
+}
