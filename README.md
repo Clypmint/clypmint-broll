@@ -14,7 +14,7 @@ Video agents are good at scripts and voices and bad at pictures. Stock shows *a*
 
 This does the part an editor does:
 
-1. **Plan.** Send the subject and, ideally, the line it plays over. The line decides which "Claude" or "Apple" you mean.
+1. **Plan.** Your agent sends the subject, the line it plays over, and its own search words (`keywords`, `names`, `look_for`). The line decides which "Claude" or "Apple" you mean. Without search words, we plan the search ourselves.
 2. **Find.** We look up what the name means (Wikidata), then search sources that publish for reuse: Wikimedia Commons, NASA, public-domain film on the Internet Archive, Openverse, the Library of Congress, and the subject's own site and official YouTube channel. Web mode (`"rights": "any"`) also searches the open web.
 3. **Check.** One vision call scores every candidate against what the shot must show. Wrong person, watermark, collage: dropped. In web mode a model watches the top videos and returns the 2-6 second moment.
 4. **Drop it in.** Each image has a `download_url` at a working size. Each video has one command that cuts just the seconds you need on your machine.
@@ -104,18 +104,18 @@ You pay per search from a prepaid balance, the way search APIs charge: one price
 
 ## Benchmark
 
-[B-Roll Bench v1](https://clypmint.com/broll/benchmarks): the same 100 requests (people, companies, places, events, archival moments, generic scenes, film and TV scenes) sent to every service, the results judged blind by two models, Gemini 3.5 Flash and Claude Sonnet 5.5 (they agreed on 88.2% of first results). Run Oct 25, 2026.
+[B-Roll Bench v1](https://clypmint.com/broll/benchmarks): the same 100 requests (people, companies, places, events, archival moments, generic scenes, film and TV scenes) sent to every service, the results judged blind by two models, Gemini 3.5 Flash and Claude Sonnet 5.5 (they agreed on 87.2% of first results). Clypmint run Oct 26, 2026, with its engine as it is live; the other services Oct 25, 2026.
 
 | Service | Right shot first | Right shot in top 5 | Median time | Price per 1,000 | Rights |
 |---|---|---|---|---|---|
-| **Clypmint, web mode** | **62.5%** | **76.5%** | 7 s | $60 | Marked not cleared |
+| **Clypmint, web mode** | **56.5%** | **75%** | 6.7 s | $60 | Marked not cleared |
+| **Clypmint, licensed** | 46% | 48% | 3.7 s | $20 | Licensed, with credit line |
 | Brave image search | 45.5% | 74.5% | 0.7 s | $5 | No license data |
-| **Clypmint, licensed** | 37.5% | 42% | 4.9 s | $20 | Licensed, with credit line |
 | Pexels | 19.5% | 28.5% | 0.4 s | Free | Stock license |
 | Wikimedia Commons search | 8.5% | 10% | 0.4 s | Free | Licensed |
 | Openverse | 6% | 7.5% | 1.8 s | Free | Licensed |
 
-On the 15 film and TV scenes, web mode got the right shot first 56.7% of the time, against 50% for Brave and 0% for every licensed source. Every request, every result and every judgement is in [`bench/v1`](bench/v1), and you can run it yourself:
+On the 85 people, companies, places, events, archival moments and generic scenes, licensed mode got the right shot first 54.2% of the time, against 44.7% for Brave, with a license on every shot. Answers vary from run to run by up to 6 points, so read a smaller gap as a tie. Every request, every result and every judgement is in [`bench/v1`](bench/v1), and you can run it yourself:
 
 ```bash
 cd bench/v1
@@ -244,7 +244,7 @@ Web mode (`"rights": "any"`) adds the open web: the scene from the film, the pho
 
 **Does it work for vertical video?** Pass `"orientation": "portrait"` to rank vertical shots first, and `cut --aspect 9:16` to fit any clip (contain by default, `--fit cover` to crop).
 
-**How fast is it?** A licensed search answers in about 4 seconds and a web search in about 6 (bench medians). A licensed search stops by 10 seconds and a web search by 20.
+**How fast is it?** A licensed search answers in about 4 seconds and a web search in about 7 (bench medians). A licensed search stops by 10 seconds and a web search by 20.
 
 ## What's in this repository
 

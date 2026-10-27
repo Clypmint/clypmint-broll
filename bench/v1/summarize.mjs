@@ -8,10 +8,12 @@ const ROOT = process.argv[2];
 const read = (f) => JSON.parse(readFileSync(path.join(HERE, f), 'utf8'));
 const queries = read('queries.json');
 const DATE = '2026-10-25';
+// Clypmint's own rows were run again on this date with its engine as it is live (#1642-#1645); the other services stay as run on DATE
+const CLYPMINT_DATE = '2026-10-26';
 
 const PROVIDERS = [
-  { id: 'clypmint-web', tag: 'web4', key: 'clypmint', name: 'Clypmint, web mode', price: '$120', rights: 'Marked not cleared', ours: true },
-  { id: 'clypmint-licensed', tag: 'licensed4', key: 'clypmint', name: 'Clypmint, licensed', price: '$20', rights: 'Licensed, with credit line', ours: true },
+  { id: 'clypmint-web', tag: 'web5', key: 'clypmint', name: 'Clypmint, web mode', price: '$60', rights: 'Marked not cleared', ours: true },
+  { id: 'clypmint-licensed', tag: 'licensed5', key: 'clypmint', name: 'Clypmint, licensed', price: '$20', rights: 'Licensed, with credit line', ours: true },
   { id: 'commons', tag: 'others', key: 'commons', name: 'Wikimedia Commons search', price: 'Free', rights: 'Licensed' },
   { id: 'brave', tag: 'others', key: 'brave', name: 'Brave image search', price: '$5', rights: 'No license data' },
   { id: 'openverse', tag: 'others', key: 'openverse', name: 'Openverse', price: 'Free', rights: 'Licensed' },
@@ -75,6 +77,7 @@ for (const p of PROVIDERS) for (const q of queries) {
 const summary = {
   name: 'B-Roll Bench v1',
   date: DATE,
+  clypmint_date: CLYPMINT_DATE,
   requests: queries.length,
   judges: JUDGES.map(({ id, label }) => ({ id, label })),
   judge_agreement: pct(agree, both),
@@ -111,6 +114,6 @@ for (const p of PROVIDERS)
       })),
     }];
   }));
-writeFileSync(path.join(PUB, 'results.json'), JSON.stringify({ name: summary.name, date: DATE, providers: summary.providers, judges: summary.judges, results }) + '\n');
+writeFileSync(path.join(PUB, 'results.json'), JSON.stringify({ name: summary.name, date: DATE, clypmint_date: CLYPMINT_DATE, providers: summary.providers, judges: summary.judges, results }) + '\n');
 writeFileSync(path.join(PUB, 'summary.json'), JSON.stringify(summary, null, 1) + '\n');
 console.log(JSON.stringify(summary.sets.map((s) => [s.id, Object.fromEntries(Object.entries(s.rows).map(([k, v]) => [k, [v.first.gemini, v.first.claude, v.top5.mean, v.median_s]]))]), null, 1), 'agreement', summary.judge_agreement);
