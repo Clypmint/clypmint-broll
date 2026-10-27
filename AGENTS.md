@@ -4,8 +4,8 @@
 
 This repository is the public, MIT side of the Clypmint B-Roll API: the Claude Code and Codex plugins, the MCP setup,
 the agent skill, the `clypmint-broll` CLI, the JavaScript and Python clients, and B-Roll Bench v1. The search engine
-runs at clypmint.com and is not in this repository. Its code lives in Clypmint's private repository, which keeps a
-copy of this one; a change lands here first and the copy follows.
+runs at clypmint.com and is not in this repository. Its code lives in Clypmint's private repository, whose
+`integrations/broll` folder is a copy of this one. Change github.com/Clypmint/clypmint-broll first; the copy follows.
 
 ## Rules
 
