@@ -1,6 +1,7 @@
 {
  "name": "B-Roll Bench v1",
  "date": "2026-10-25",
+ "clypmint_date": "2026-10-26",
  "requests": 100,
  "judges": [
   {
@@ -12,7 +13,7 @@
    "label": "Claude Sonnet 5.5 (Anthropic)"
   }
  ],
- "judge_agreement": 88.2,
+ "judge_agreement": 87.2,
  "providers": [
   {
    "id": "clypmint-web",
@@ -65,31 +66,31 @@
    "rows": {
     "clypmint-web": {
      "first": {
-      "gemini": 70.6,
-      "claude": 56.5,
-      "mean": 63.6
+      "gemini": 60,
+      "claude": 60,
+      "mean": 60
      },
      "top5": {
-      "gemini": 81.2,
-      "claude": 75.3,
-      "mean": 78.3
+      "gemini": 75.3,
+      "claude": 77.6,
+      "mean": 76.4
      },
-     "median_s": 7,
+     "median_s": 6.8,
      "empty": 0
     },
     "clypmint-licensed": {
      "first": {
-      "gemini": 47.1,
-      "claude": 41.2,
-      "mean": 44.2
+      "gemini": 56.5,
+      "claude": 51.8,
+      "mean": 54.2
      },
      "top5": {
-      "gemini": 52.9,
-      "claude": 45.9,
-      "mean": 49.4
+      "gemini": 60,
+      "claude": 52.9,
+      "mean": 56.5
      },
-     "median_s": 5,
-     "empty": 0
+     "median_s": 3.8,
+     "empty": 4.7
     },
     "commons": {
      "first": {
@@ -156,17 +157,17 @@
    "rows": {
     "clypmint-web": {
      "first": {
-      "gemini": 60,
-      "claude": 53.3,
-      "mean": 56.7
+      "gemini": 40,
+      "claude": 33.3,
+      "mean": 36.7
      },
      "top5": {
       "gemini": 73.3,
       "claude": 60,
       "mean": 66.7
      },
-     "median_s": 7,
-     "empty": 6.7
+     "median_s": 6,
+     "empty": 0
     },
     "clypmint-licensed": {
      "first": {
@@ -179,8 +180,8 @@
       "claude": 0,
       "mean": 0
      },
-     "median_s": 4.3,
-     "empty": 6.7
+     "median_s": 3.3,
+     "empty": 46.7
     },
     "commons": {
      "first": {
@@ -247,31 +248,31 @@
    "rows": {
     "clypmint-web": {
      "first": {
-      "gemini": 69,
+      "gemini": 57,
       "claude": 56,
-      "mean": 62.5
+      "mean": 56.5
      },
      "top5": {
-      "gemini": 80,
-      "claude": 73,
-      "mean": 76.5
+      "gemini": 75,
+      "claude": 75,
+      "mean": 75
      },
-     "median_s": 7,
-     "empty": 1
+     "median_s": 6.7,
+     "empty": 0
     },
     "clypmint-licensed": {
      "first": {
-      "gemini": 40,
-      "claude": 35,
-      "mean": 37.5
+      "gemini": 48,
+      "claude": 44,
+      "mean": 46
      },
      "top5": {
-      "gemini": 45,
-      "claude": 39,
-      "mean": 42
+      "gemini": 51,
+      "claude": 45,
+      "mean": 48
      },
-     "median_s": 4.9,
-     "empty": 1
+     "median_s": 3.7,
+     "empty": 11
     },
     "commons": {
      "first": {
@@ -338,8 +339,8 @@
    "label": "People",
    "n": 15,
    "first": {
-    "clypmint-web": 53.4,
-    "clypmint-licensed": 26.7,
+    "clypmint-web": 56.7,
+    "clypmint-licensed": 36.7,
     "commons": 3.4,
     "brave": 46.7,
     "openverse": 0,
@@ -351,7 +352,7 @@
    "label": "Companies and products",
    "n": 15,
    "first": {
-    "clypmint-web": 53.4,
+    "clypmint-web": 46.7,
     "clypmint-licensed": 23.4,
     "commons": 0,
     "brave": 30,
@@ -364,8 +365,8 @@
    "label": "Places",
    "n": 15,
    "first": {
-    "clypmint-web": 76.7,
-    "clypmint-licensed": 70,
+    "clypmint-web": 66.7,
+    "clypmint-licensed": 80,
     "commons": 6.7,
     "brave": 60,
     "openverse": 26.7,
@@ -378,7 +379,7 @@
    "n": 15,
    "first": {
     "clypmint-web": 76.7,
-    "clypmint-licensed": 56.7,
+    "clypmint-licensed": 76.7,
     "commons": 23.4,
     "brave": 50,
     "openverse": 0,
@@ -391,7 +392,7 @@
    "n": 10,
    "first": {
     "clypmint-web": 70,
-    "clypmint-licensed": 50,
+    "clypmint-licensed": 60,
     "commons": 30,
     "brave": 65,
     "openverse": 10,
@@ -403,8 +404,8 @@
    "label": "Generic scenes",
    "n": 15,
    "first": {
-    "clypmint-web": 53.4,
-    "clypmint-licensed": 40,
+    "clypmint-web": 46.7,
+    "clypmint-licensed": 50,
     "commons": 3.4,
     "brave": 23.3,
     "openverse": 3.4,
@@ -416,7 +417,7 @@
    "label": "Movie and TV scenes",
    "n": 15,
    "first": {
-    "clypmint-web": 56.7,
+    "clypmint-web": 36.7,
     "clypmint-licensed": 0,
     "commons": 0,
     "brave": 50,

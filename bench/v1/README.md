@@ -1,6 +1,6 @@
 # B-Roll Bench v1
 
-The same 100 b-roll requests sent to six services, every result judged blind by two models from two companies. Run on Oct 25, 2026. The write-up is at [clypmint.com/broll/benchmarks](https://clypmint.com/broll/benchmarks).
+The same 100 b-roll requests sent to six services, every result judged blind by two models from two companies. Clypmint's rows were run on Oct 26, 2026, with its engine as it is live; the other services on Oct 25, 2026. The write-up is at [clypmint.com/broll/benchmarks](https://clypmint.com/broll/benchmarks).
 
 | File | What it is |
 |---|---|
@@ -17,7 +17,7 @@ The same 100 b-roll requests sent to six services, every result judged blind by 
 - Every service gets the same words, written before the first run, so nobody can tune them to win.
 - The judges see what each result shows (a photo, a video's thumbnail, or for a moment inside a video the frame at its middle, cut the way the CLI cuts it), never which service sent it.
 - A result is right when both its subject is exactly what the request names and it is real media, not an illustration or a render.
-- Scores are the mean of the two judges. They agreed on 88.2% of first results.
+- Scores are the mean of the two judges. They agreed on 87.2% of first results.
 - Price is the list price per 1,000 searches. Time is the median from request to answer, from one machine in the US.
 
 ## Run it yourself
