@@ -3,6 +3,13 @@
 Notable changes to clypmint-broll. Dates are release dates. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [semantic versioning](https://semver.org).
 
+## Unreleased
+
+### Changed
+
+- Every new account gets 100 free searches. The README and the skill say so, and the README shows its star, license and
+  MCP registry badges.
+
 ## 1.2.1 (2026-10-27)
 
 ### Fixed
