@@ -1,5 +1,7 @@
 # Clypmint B-Roll (b-roll of anything, for any agent)
 
+[![GitHub stars](https://img.shields.io/github/stars/Clypmint/clypmint-broll?style=social)](https://github.com/Clypmint/clypmint-broll/stargazers) [![MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE) [![MCP registry](https://img.shields.io/badge/MCP-com.clypmint%2Fbroll-black)](https://registry.modelcontextprotocol.io)
+
 ![An agent asks for b-roll; the API finds real footage, scores every shot and checks every license](docs/assets/hero.gif)
 
 **A b-roll library your agent searches in plain words.** Give it one API key and it gets the real shot: the person,
@@ -14,7 +16,7 @@ the keynote shows the first iPhone. Send the line from your script and get the s
 Built by [Clypmint](https://clypmint.com) for its AI video editor, and open to every agent and every video app. Live at
 [clypmint.com/broll](https://clypmint.com/broll).
 
-> **Launch week: 50% off every search through Nov 2.** $0.01 a licensed search, $0.03 a web search.
+> **Your first 100 searches are free.** Then $0.02 a licensed search, $0.06 a web search, half price through Nov 2.
 > [Get a key](https://clypmint.com/broll/dashboard) · [Try it in the browser](https://clypmint.com/broll) (no key) ·
 > [Docs](https://clypmint.com/broll/docs) · [Benchmark](https://clypmint.com/broll/benchmarks)
 
@@ -55,7 +57,7 @@ A search is only charged when it finds checked shots.
 ## Quickstart
 
 ```bash
-# 1. make a key and top up (from $10): https://clypmint.com/broll/dashboard
+# 1. sign up and make a key (your first 100 searches are free): https://clypmint.com/broll/dashboard
 export CLYPMINT_API_KEY=cm_live_...
 
 # 2. give it to your agent (Claude Code)
@@ -269,6 +271,7 @@ only a search that finds checked shots is charged.
 | Web search (`"rights": "any"`) | $0.06 | $60 | $0.03 |
 
 - A search that finds nothing, only near matches, or shots that could not be checked costs nothing.
+- Every new account gets 100 free searches ($2 of credit), once.
 - Top up from $10 (to $1,000 at a time). Your balance never expires. Turn on auto top-up and we add the amount you pick
   when it runs low.
 - Any balance you have not used can be refunded within 14 days of adding it.
