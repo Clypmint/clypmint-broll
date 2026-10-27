@@ -5,7 +5,7 @@ description: Source real, verified b-roll (photos and footage) for a video scrip
 
 # Sourcing b-roll with Clypmint B-Roll
 
-You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:Clypmint/clypmint-broll#v1.2.0` with `CLYPMINT_API_KEY` set.
+You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:Clypmint/clypmint-broll#v1.2.1` with `CLYPMINT_API_KEY` set.
 
 ## 1. Read the whole script first
 State its point in one sentence. B-roll illustrates the point of a line, not its nearest keyword.

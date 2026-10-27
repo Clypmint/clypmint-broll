@@ -11,7 +11,7 @@ import urllib.error
 import urllib.request
 
 __all__ = ["Broll", "BrollError"]
-__version__ = "1.1.0"
+__version__ = "1.2.1"
 
 DEFAULT_BASE_URL = "https://clypmint.com"
 
