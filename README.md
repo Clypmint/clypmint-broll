@@ -1,46 +1,72 @@
-# Clypmint B-Roll (real footage for any agent)
+# Clypmint B-Roll (b-roll of anything, for any agent)
 
-![An agent asks for b-roll; the API finds real footage, scores every shot and checks every license](docs/hero.gif)
+![An agent asks for b-roll; the API finds real footage, scores every shot and checks every license](docs/assets/hero.gif)
 
-**Ask for any shot in plain words. Get the real footage, scored, with its rights.**
+**A b-roll library your agent searches in plain words.** Give it one API key and it gets the real shot: the person,
+company, product, place or event your script names. One search covers Wikimedia Commons, NASA, the Internet Archive,
+the Library of Congress, Openverse, and the subject's own site and YouTube channel. Web mode adds the open web, down to
+the exact moment inside a YouTube video. A vision model checks every shot, and every shot comes with its rights.
+**Priced per search, from 2 cents**, with no stock subscription.
 
-One API key gives your agent b-roll an editor would pick: the person, the company, the app, the place, the moment your script names. Every candidate is checked by a vision model and scored 0-10. Every shot says where it came from and what you may do with it. It plugs into Claude Code, Cursor, Codex and any MCP client, and there is a REST API, a CLI and clients for JavaScript and Python. Built by [Clypmint](https://clypmint.com).
+**Ask for the shot, not the source.** You don't need to know which archive has the Apollo 11 launch, or which minute of
+the keynote shows the first iPhone. Send the line from your script and get the shot.
 
-> **Launch week: 50% off every search through Nov 2.** $0.01 a licensed search, $0.03 a web search. [Get a key](https://clypmint.com/broll/dashboard) · [Try it in the browser](https://clypmint.com/broll) (no key) · [Docs](https://clypmint.com/broll/docs) · [Benchmark](https://clypmint.com/broll/benchmarks)
+Built by [Clypmint](https://clypmint.com) for its AI video editor, and open to every agent and every video app. Live at
+[clypmint.com/broll](https://clypmint.com/broll).
+
+> **Launch week: 50% off every search through Nov 2.** $0.01 a licensed search, $0.03 a web search.
+> [Get a key](https://clypmint.com/broll/dashboard) · [Try it in the browser](https://clypmint.com/broll) (no key) ·
+> [Docs](https://clypmint.com/broll/docs) · [Benchmark](https://clypmint.com/broll/benchmarks)
 
 ## Why it exists
 
-Video agents are good at scripts and voices and bad at pictures. Stock shows *a* CEO; your script names *the* CEO. Image search returns links with no license, and an agent cannot watch a video to find the four seconds it needs.
+Video agents are good at scripts and voices and bad at pictures. Stock shows *a* CEO; your script names *the* CEO.
+Image search gives you links with no license. And an agent can't watch a video to find the four seconds it needs.
 
 This does the part an editor does:
 
-1. **Plan.** Your agent sends the subject, the line it plays over, and its own search words (`keywords`, `names`, `look_for`). The line decides which "Claude" or "Apple" you mean. Without search words, we plan the search ourselves.
-2. **Find.** We look up what the name means (Wikidata), then search sources that publish for reuse: Wikimedia Commons, NASA, public-domain film on the Internet Archive, Openverse, the Library of Congress, and the subject's own site and official YouTube channel. Web mode (`"rights": "any"`) also searches the open web.
-3. **Check.** One vision call scores every candidate against what the shot must show. Wrong person, watermark, collage: dropped. In web mode a model watches the top videos and returns the 2-6 second moment.
-4. **Drop it in.** Each image has a `download_url` at a working size. Each video has one command that cuts just the seconds you need on your machine.
+1. **Plan.** Your agent sends the subject, the line it plays over, and its own search words. The line decides which
+   "Apple" you mean.
+2. **Find.** We look up what the name means on Wikidata, then search every source at once.
+3. **Check.** A vision model scores every shot against what it must show. Wrong person, watermark, collage: dropped. In
+   web mode a model watches the top videos and returns the 2-6 second moment.
+4. **Drop it in.** Each image has a `download_url`. Each video has one command that cuts just the seconds you need, on
+   your machine.
 
 | You ask for | You get |
 |---|---|
 | `Sam Altman` | Licensed portraits of Sam Altman, scored 9-10, with the credit line |
-| `booster` + "SpaceX just landed the booster again" | Public-domain footage of a Falcon 9 booster touchdown |
-| `Notion` + "I plan every video in Notion" | The live notion.com interface, recorded on your machine |
-| A scene from a film, web mode (`"rights": "any"`) | The moment in the video, as a start and end and a command that cuts it, marked Not cleared |
+| `booster` + "SpaceX just landed the booster again" | Public-domain footage of a Falcon 9 booster landing |
+| `Notion` + "I plan every video in Notion" | The live notion.com site, recorded on your machine |
+| A scene from a film, in web mode | The moment in the video, with a start, an end and a command that cuts it, marked Not cleared |
+
+## Two kinds of search, one key
+
+- **Licensed** (the default, $0.02). Only sources whose terms allow reuse. Every shot has its license and credit line.
+- **Web** (`"rights": "any"`, $0.06). Also the open web: the scene from the film, the photo from yesterday's news, the
+  moment inside a YouTube video. These shots come back marked *Not cleared*, because the owner holds the rights.
+
+A search is only charged when it finds checked shots.
+
+---
+
+# Part 1 · Using it
 
 ## Quickstart
 
 ```bash
-# 1. Make a key and top up (from $10): https://clypmint.com/broll/dashboard
+# 1. make a key and top up (from $10): https://clypmint.com/broll/dashboard
 export CLYPMINT_API_KEY=cm_live_...
 
-# 2. Give it to your agent (Claude Code)
+# 2. give it to your agent (Claude Code)
 claude mcp add --transport http clypmint-broll https://clypmint.com/mcp/broll \
   --header "Authorization: Bearer $CLYPMINT_API_KEY"
 
-# 3. Try it
-npx -y github:Clypmint/clypmint-broll#v1.2.0 search "Saturn V launch" --type video
+# 3. try it
+npx -y github:Clypmint/clypmint-broll#v1.2.1 search "Saturn V launch" --type video
 ```
 
-Then ask your agent: *"find b-roll for every name in this script."*
+Then ask your agent: *"find b-roll for every name in this script."* Every CLI command is in [USAGE.md](USAGE.md).
 
 ### Or install it as a Claude Code plugin
 
@@ -49,9 +75,19 @@ Then ask your agent: *"find b-roll for every name in this script."*
 /plugin install clypmint-broll@clypmint-broll
 ```
 
-The plugin asks for your key once and keeps it in your system's secure store. It brings the MCP server (`find_broll`, `plan_broll`, `broll_usage`) and the agent skill that teaches sourcing, placing and crediting a shot.
+The plugin asks for your key once and keeps it in your system's secure store. It brings the MCP tools and the skill
+below.
 
-### Other agents
+### Codex
+
+```bash
+codex plugin marketplace add Clypmint/clypmint-broll
+codex plugin add clypmint-broll@clypmint-broll
+```
+
+The Codex plugin reads your key from `CLYPMINT_API_KEY`.
+
+### Cursor and other agents
 
 <details><summary>Cursor (<code>~/.cursor/mcp.json</code>)</summary>
 
@@ -67,7 +103,7 @@ The plugin asks for your key once and keeps it in your system's secure store. It
 ```
 </details>
 
-<details><summary>Codex (<code>~/.codex/config.toml</code>)</summary>
+<details><summary>Codex without the plugin (<code>~/.codex/config.toml</code>)</summary>
 
 ```toml
 [mcp_servers.clypmint-broll]
@@ -82,45 +118,50 @@ bearer_token_env_var = "CLYPMINT_API_KEY"
 npx skills add Clypmint/clypmint-broll
 ```
 
-Or copy [`skills/broll/SKILL.md`](skills/broll/SKILL.md) into your agent's skills folder (Claude Code: `~/.claude/skills/broll/SKILL.md`).
+Or copy [`skills/broll/SKILL.md`](skills/broll/SKILL.md) into your agent's skills folder (Claude Code:
+`~/.claude/skills/broll/SKILL.md`).
 </details>
 
 The MCP server is `https://clypmint.com/mcp/broll`, listed on the official MCP registry as `com.clypmint/broll`.
 
-## Pricing
+### What your agent gets
 
-You pay per search from a prepaid balance, the way search APIs charge: one price per call, stated before you call, and only a search that finds verified shots is charged.
+| Tool | What your agent can do |
+|---|---|
+| `find_broll` | Send a subject and the line it plays over. Get checked shots, best first. |
+| `plan_broll` | Send a whole script. Get every moment worth a cutaway, each with its shots. |
+| `broll_usage` | See the balance, this month's spend and the prices. |
+| [`broll` skill](skills/broll/SKILL.md) | Source, cut, place and credit each shot. |
 
-| | Price | Per 1,000 | Launch week (through Nov 2) |
-|---|---|---|---|
-| Licensed search (default) | $0.02 | $20 | $0.01 |
-| Web search (`"rights": "any"`) | $0.06 | $60 | $0.03 |
+## Using Claude to edit videos?
 
-- A search that finds nothing, only near matches, or shots that could not be checked costs nothing.
-- Top up from $10 (to $1,000 at a time). Your balance never expires. Turn on auto top-up and we add the amount you pick when it runs low.
-- Any balance you have not used can be refunded within 14 days of adding it.
-- Every answer carries `usage`: what it cost, the balance left and the prices now. `GET /api/v1/broll/usage` gives the same before you search. Out of balance, a search answers `402 balance_too_low` with the price, the balance and the top-up link.
-- Try it free in the browser first, no key: [clypmint.com/broll](https://clypmint.com/broll).
+Already pointing Claude at the Internet Archive for b-roll? This searches it too, together with Wikimedia Commons,
+NASA, the Library of Congress, Openverse and official channels, in one call. It checks every shot and tells you what
+you may do with it.
 
-## Benchmark
+Install the plugin (above), then add this to your project's `CLAUDE.md` once:
 
-[B-Roll Bench v1](https://clypmint.com/broll/benchmarks): the same 100 requests (people, companies, places, events, archival moments, generic scenes, film and TV scenes) sent to every service, the results judged blind by two models, Gemini 3.5 Flash and Claude Sonnet 5.5 (they agreed on 87.2% of first results). Clypmint run Oct 26, 2026, with its engine as it is live; the other services Oct 25, 2026.
-
-| Service | Right shot first | Right shot in top 5 | Median time | Price per 1,000 | Rights |
-|---|---|---|---|---|---|
-| **Clypmint, web mode** | **56.5%** | **75%** | 6.7 s | $60 | Marked not cleared |
-| **Clypmint, licensed** | 46% | 48% | 3.7 s | $20 | Licensed, with credit line |
-| Brave image search | 45.5% | 74.5% | 0.7 s | $5 | No license data |
-| Pexels | 19.5% | 28.5% | 0.4 s | Free | Stock license |
-| Wikimedia Commons search | 8.5% | 10% | 0.4 s | Free | Licensed |
-| Openverse | 6% | 7.5% | 1.8 s | Free | Licensed |
-
-On the 85 people, companies, places, events, archival moments and generic scenes, licensed mode got the right shot first 54.2% of the time, against 44.7% for Brave, with a license on every shot. Answers vary from run to run by up to 6 points, so read a smaller gap as a tie. Every request, every result and every judgement is in [`bench/v1`](bench/v1), and you can run it yourself:
-
-```bash
-cd bench/v1
-CLYPMINT_API_KEY=... GEMINI_API_KEY=... BRAVE_API_KEY=... PEXELS_API_KEY=... node harness.mjs run --api
+```text
+Whenever a line names a person, company, product, place or event, get b-roll for it with find_broll
+(or plan_broll for the whole script). Send the line as context and 1-3 short keywords. Use the top shot,
+cut only the seconds you need with its cut_command, and put its credit line in the credits.
 ```
+
+It works with any setup that renders files: Remotion, HyperFrames, ffmpeg or an editor's timeline. The full version,
+with where the files go, is [examples/claude-video](examples/claude-video).
+
+## Building an AI video app?
+
+Use it as your app's b-roll source. Two calls cover it:
+
+- `POST /api/v1/broll/search`: send a subject and its line, get checked shots, best first.
+- `POST /api/v1/broll/plan`: send a whole script, get the moments worth a cutaway, each with its shots and the words it
+  starts on (and times, if you send word timings).
+
+Every shot carries its source, license and credit line, so your users can publish it. You pay per search from one
+prepaid balance: no seats and no monthly fee. Send an `Idempotency-Key` and a retry returns the first answer, never
+billed twice. The [OpenAPI spec](https://clypmint.com/api/v1/broll/openapi.json) makes a client in any language. Need
+more volume? Write to support@clypmint.com.
 
 ## What you get back
 
@@ -174,7 +215,8 @@ curl https://clypmint.com/api/v1/broll/search \
 }
 ```
 
-A whole script at once: each moment comes back with the exact words it starts on, and its time if you send word timings.
+A whole script at once: each moment comes back with the exact words it starts on, and its time if you send word
+timings.
 
 ```bash
 curl https://clypmint.com/api/v1/broll/plan \
@@ -182,14 +224,15 @@ curl https://clypmint.com/api/v1/broll/plan \
   -d '{"transcript": "Last week I flew to Tokyo to meet the Figma team...", "max_beats": 8}'
 ```
 
-The full reference is at [clypmint.com/broll/docs](https://clypmint.com/broll/docs), and the OpenAPI spec at [`/api/v1/broll/openapi.json`](https://clypmint.com/api/v1/broll/openapi.json) (Postman, Insomnia, or a generated client in any language).
+The full reference is at [clypmint.com/broll/docs](https://clypmint.com/broll/docs), and the OpenAPI spec at
+[`/api/v1/broll/openapi.json`](https://clypmint.com/api/v1/broll/openapi.json).
 
 ## Use it from code
 
 **JavaScript**
 
 ```bash
-npm install github:Clypmint/clypmint-broll#v1.2.0
+npm install github:Clypmint/clypmint-broll#v1.2.1
 ```
 
 ```js
@@ -202,7 +245,7 @@ const { results, usage } = await broll.search({ query: 'Figma', context: 'we des
 **Python**
 
 ```bash
-pip install "git+https://github.com/Clypmint/clypmint-broll@v1.2.0#subdirectory=python"
+pip install "git+https://github.com/Clypmint/clypmint-broll@v1.2.1#subdirectory=python"
 ```
 
 ```python
@@ -212,16 +255,53 @@ broll = Broll()  # reads CLYPMINT_API_KEY
 shots = broll.search("Eiffel Tower", type="video")["results"]
 ```
 
-**CLI**
+**CLI**: search, plan a script, cut a clip, record a live site. See [USAGE.md](USAGE.md). Runnable examples, from a
+script to a folder of b-roll, are in [examples/](examples).
+
+## Pricing
+
+You pay per search from a prepaid balance, the way search APIs charge: one price per call, stated before you call, and
+only a search that finds checked shots is charged.
+
+| | Price | Per 1,000 | Launch week (through Nov 2) |
+|---|---|---|---|
+| Licensed search (default) | $0.02 | $20 | $0.01 |
+| Web search (`"rights": "any"`) | $0.06 | $60 | $0.03 |
+
+- A search that finds nothing, only near matches, or shots that could not be checked costs nothing.
+- Top up from $10 (to $1,000 at a time). Your balance never expires. Turn on auto top-up and we add the amount you pick
+  when it runs low.
+- Any balance you have not used can be refunded within 14 days of adding it.
+- Every answer carries `usage`: what it cost, the balance left and the prices now. `GET /api/v1/broll/usage` gives the
+  same before you search. Out of balance, a search answers `402 balance_too_low` with the price, the balance and the
+  top-up link.
+- Try it free in the browser first, no key: [clypmint.com/broll](https://clypmint.com/broll).
+
+## Benchmark
+
+[B-Roll Bench v1](https://clypmint.com/broll/benchmarks): the same 100 requests (people, companies, places, events,
+archival moments, generic scenes, film and TV scenes) sent to every service, the results judged blind by two models,
+Gemini 3.5 Flash and Claude Sonnet 5.5 (they agreed on 87.2% of first results). Clypmint run Oct 26, 2026, with its
+engine as it is live; the other services Oct 25, 2026.
+
+| Service | Right shot first | Right shot in top 5 | Median time | Price per 1,000 | Rights |
+|---|---|---|---|---|---|
+| **Clypmint, web mode** | **56.5%** | **75%** | 6.7 s | $60 | Marked not cleared |
+| **Clypmint, licensed** | 46% | 48% | 3.7 s | $20 | Licensed, with credit line |
+| Brave image search | 45.5% | 74.5% | 0.7 s | $5 | No license data |
+| Pexels | 19.5% | 28.5% | 0.4 s | Free | Stock license |
+| Wikimedia Commons search | 8.5% | 10% | 0.4 s | Free | Licensed |
+| Openverse | 6% | 7.5% | 1.8 s | Free | Licensed |
+
+On the 85 people, companies, places, events, archival moments and generic scenes, licensed mode got the right shot
+first 54.2% of the time, against 44.7% for Brave, with a license on every shot. Answers vary from run to run by up to 6
+points, so read a smaller gap as a tie. Every request, every result and every judgement is in [`bench/v1`](bench/v1),
+and you can run it yourself:
 
 ```bash
-npx -y github:Clypmint/clypmint-broll#v1.2.0 search "Eiffel Tower" --type video
-npx -y github:Clypmint/clypmint-broll#v1.2.0 get "Notion" --type video --out notion.mp4   # records the live site
-npx -y github:Clypmint/clypmint-broll#v1.2.0 cut "https://www.youtube.com/watch?v=..." --start 12 --duration 4 --aspect 9:16
-npx -y github:Clypmint/clypmint-broll#v1.2.0 usage
+cd bench/v1
+CLYPMINT_API_KEY=... GEMINI_API_KEY=... BRAVE_API_KEY=... PEXELS_API_KEY=... node harness.mjs run --api
 ```
-
-`cut` needs ffmpeg (and yt-dlp for YouTube, X or TikTok pages). `capture` and `get` for a live site use the Chrome, Edge, Brave or Chromium you already have. Every command takes `--json` for agents.
 
 ## Where the footage comes from
 
@@ -229,36 +309,72 @@ Licensed mode, the default, uses only sources whose terms allow reuse, and every
 
 - **Wikidata** (CC0) tells us who or what a name is, its official photo, logo, website and YouTube channel.
 - **Wikimedia Commons**: freely licensed photos and video, with the license and author on each file.
-- **NASA** image and video library, **public-domain film** on the Internet Archive, **Openverse** and the **Library of Congress** photo collections marked free to use.
-- **The subject's own website and official YouTube channel**: a link plus a command. The clip is cut, or the site recorded, on your machine. We never host it.
+- **NASA** image and video library, **public-domain film** on the Internet Archive, **Openverse** and the **Library of
+  Congress** photo collections marked free to use.
+- **The subject's own website and official YouTube channel**: a link plus a command. The clip is cut, or the site
+  recorded, on your machine. We never host it.
 
-Web mode (`"rights": "any"`) adds the open web: the scene from the film, the photo from yesterday's news. Those shots come back with `license.cleared: false` and the name `Not cleared`, because the owner holds the rights. Check before commercial use.
+Web mode (`"rights": "any"`) adds the open web: the scene from the film, the photo from yesterday's news. Those shots
+come back with `license.cleared: false` and the name `Not cleared`, because the owner holds the rights. Check before
+commercial use.
 
-`license.commercial_use` is `true` (free for commercial use under its terms), `false` (non-commercial only; ranked last) or `null` (the owner holds the rights). Use the `attribution` line whenever one is given. You are responsible for how you use what you publish.
+`license.commercial_use` is `true` (free for commercial use under its terms), `false` (non-commercial only; ranked
+last) or `null` (the owner holds the rights). Use the `attribution` line whenever one is given. You are responsible for
+how you use what you publish.
 
 ## FAQ
 
-**Is this a stock library?** No. Stock shows *a* CEO. This shows *the* CEO your script names. For generic scenes it finds real, freely licensed photos and footage.
+**Is this a stock library?** No. Stock shows *a* CEO. This shows *the* CEO your script names. For generic scenes it
+finds real, freely licensed photos and footage.
 
-**What does "verified" mean?** A vision model saw every candidate and scored it against what the shot must show. `verified: false` means the check could not run; those results are ranked by source alone and cost nothing.
+**What does "verified" mean?** A vision model saw every candidate and scored it against what the shot must show.
+`verified: false` means the check could not run; those results are ranked by source alone and cost nothing.
 
-**Does it work for vertical video?** Pass `"orientation": "portrait"` to rank vertical shots first, and `cut --aspect 9:16` to fit any clip (contain by default, `--fit cover` to crop).
+**Does it work for vertical video?** Pass `"orientation": "portrait"` to rank vertical shots first, and
+`cut --aspect 9:16` to fit any clip (contain by default, `--fit cover` to crop).
 
-**How fast is it?** A licensed search answers in about 4 seconds and a web search in about 7 (bench medians). A licensed search stops by 10 seconds and a web search by 20.
+**How fast is it?** A licensed search answers in about 4 seconds and a web search in about 7 (bench medians). A
+licensed search stops by 10 seconds and a web search by 20.
 
-## What's in this repository
+**Is it safe to install?** The plugin is an MCP address and a skill, with no hooks and nothing that runs on its own. The
+CLI has no dependencies, and release tags here are locked. See [SECURITY.md](SECURITY.md).
+
+---
+
+# Part 2 · This repository
+
+## What's here
 
 | Path | What it is |
 |---|---|
-| [`src/`](src), [`bin/`](bin) | The JavaScript client and the `clypmint-broll` CLI (search, plan, get, cut, capture, usage) |
+| [`src/`](src), [`bin/`](bin) | The JavaScript client and the `clypmint-broll` CLI |
 | [`python/`](python) | The Python client |
 | [`skills/broll/`](skills/broll) | The agent skill: how to source, place and credit b-roll |
 | [`.claude-plugin/`](.claude-plugin), [`.mcp.json`](.mcp.json) | The Claude Code plugin and its marketplace |
+| [`.codex-plugin/`](.codex-plugin), [`.codex-mcp.json`](.codex-mcp.json) | The Codex plugin |
+| [`examples/`](examples) | Runnable examples: a script to a folder of b-roll (Node, Python), curl, and a Claude video setup |
 | [`bench/v1/`](bench/v1) | B-Roll Bench v1: the 100 requests, the harness, the judge prompts and every result |
-| [`test/`](test) | Tests for the CLI and the client |
+| [`test/`](test) | Tests for the CLI, the client, the examples and the plugin files |
 
-The search engine itself runs as a hosted service at clypmint.com.
+The search engine itself runs as a hosted service at clypmint.com. It is not in this repository.
+
+## Tests
+
+```bash
+npm test                                                          # Node 18 or newer, nothing to install
+cd python && PYTHONPATH=. python3 -m unittest discover -s tests   # Python 3.8 or newer
+```
+
+The tests use a local fake server, so they need no key and make no searches.
+
+## Contributing and security
+
+- [CONTRIBUTING.md](CONTRIBUTING.md): set up, make a change, open a pull request.
+- [SECURITY.md](SECURITY.md): what the plugin and CLI can do on your machine, and how to report a problem privately.
+- [CHANGELOG.md](CHANGELOG.md): what changed in each release.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ## License
 
-The client, CLI, skill, plugin and benchmark in this repository are MIT. The API is a hosted service by [Clypmint](https://clypmint.com).
+The client, CLI, skill, plugins and benchmark in this repository are MIT. The API is a hosted service by
+[Clypmint](https://clypmint.com).
