@@ -38,6 +38,7 @@ const HELP = `clypmint-broll ${VERSION}: real, verified b-roll for video agents 
 
   search <subject>        find shots   --context "<script line>" --type image|video|any --limit N --orientation portrait
                           --rights any  also the open web (movie clips, news photos); shots are marked NOT cleared
+                          --keywords "Mandela 1990, Mandela crowd" --names "Nelson Mandela" --look-for "..."  your own plan
   plan <file|->           b-roll for a whole script  --max-beats N --per-beat N
   get <subject>           search, then make the best shot's file  --type video --out file
   cut <url|file>          cut a clip   --start S --duration D [--end E] --aspect 9:16 --fit contain|cover --keep-audio
@@ -90,6 +91,10 @@ export async function main(argv) {
       ...(flags.limit ? { limit: num(flags.limit) } : {}),
       ...(flags.minScore ? { min_score: num(flags.minScore) } : {}),
       ...(flags.rights ? { rights: String(flags.rights) } : {}),
+      // (your own plan: the search skips its planning step)
+      ...(flags.keywords ? { keywords: String(flags.keywords).split(',').map((x) => x.trim()).filter(Boolean) } : {}),
+      ...(flags.names ? { names: String(flags.names).split(',').map((x) => x.trim()).filter(Boolean) } : {}),
+      ...(flags.lookFor ? { look_for: String(flags.lookFor) } : {}),
     });
     if (command === 'search')
       return print(flags, result, (r) =>

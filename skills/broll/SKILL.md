@@ -5,7 +5,7 @@ description: Source real, verified b-roll (photos and footage) for a video scrip
 
 # Sourcing b-roll with Clypmint B-Roll
 
-You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:Clypmint/clypmint-broll#v1.1.0` with `CLYPMINT_API_KEY` set.
+You have the `find_broll` and `plan_broll` tools (MCP server `https://clypmint.com/mcp/broll`), or the CLI `npx -y github:Clypmint/clypmint-broll#v1.2.0` with `CLYPMINT_API_KEY` set.
 
 ## 1. Read the whole script first
 State its point in one sentence. B-roll illustrates the point of a line, not its nearest keyword.
@@ -21,6 +21,10 @@ For a whole script, call `plan_broll` once. It returns each moment with the exac
 ## 3. Search each moment well
 - `query` is the subject as people name it: "Sam Altman", "Notion", "Shibuya Crossing".
 - Always pass `context`: the exact line. It decides which "Claude" or "Apple" is meant.
+- Always send your own plan, so the search starts on it at once and skips its own planning step:
+  - `keywords`: 1-5 archive searches of 1-3 plain words, nouns first, the most specific first. Archives match every word, so "jazz band", not "vintage jazz band performing live". Add the year or event when the line names one: `["Mandela 1990", "Mandela crowd", "Nelson Mandela"]`.
+  - `names`: every named person, company, product, place or event, as Wikipedia titles it: `["Nelson Mandela"]`.
+  - `look_for`: what the right shot shows, with its era, place and action: "Nelson Mandela waving to a crowd after his release from prison in 1990".
 - `type`: `image` for a named person or a logo; `video` for an action, a place or an event; `any` when unsure.
 - The real thing (a movie scene, a recent news photo): `rights: "any"` also searches the open web. Those shots have `license.cleared: false`; tell the user they are not licensed. Default is `licensed`.
 - Vertical edit: `orientation: "portrait"` ranks vertical shots first.

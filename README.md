@@ -37,7 +37,7 @@ claude mcp add --transport http clypmint-broll https://clypmint.com/mcp/broll \
   --header "Authorization: Bearer $CLYPMINT_API_KEY"
 
 # 3. Try it
-npx -y github:Clypmint/clypmint-broll#v1.1.0 search "Saturn V launch" --type video
+npx -y github:Clypmint/clypmint-broll#v1.2.0 search "Saturn V launch" --type video
 ```
 
 Then ask your agent: *"find b-roll for every name in this script."*
@@ -189,7 +189,7 @@ The full reference is at [clypmint.com/broll/docs](https://clypmint.com/broll/do
 **JavaScript**
 
 ```bash
-npm install github:Clypmint/clypmint-broll#v1.1.0
+npm install github:Clypmint/clypmint-broll#v1.2.0
 ```
 
 ```js
@@ -202,7 +202,7 @@ const { results, usage } = await broll.search({ query: 'Figma', context: 'we des
 **Python**
 
 ```bash
-pip install "git+https://github.com/Clypmint/clypmint-broll@v1.1.0#subdirectory=python"
+pip install "git+https://github.com/Clypmint/clypmint-broll@v1.2.0#subdirectory=python"
 ```
 
 ```python
@@ -215,10 +215,10 @@ shots = broll.search("Eiffel Tower", type="video")["results"]
 **CLI**
 
 ```bash
-npx -y github:Clypmint/clypmint-broll#v1.1.0 search "Eiffel Tower" --type video
-npx -y github:Clypmint/clypmint-broll#v1.1.0 get "Notion" --type video --out notion.mp4   # records the live site
-npx -y github:Clypmint/clypmint-broll#v1.1.0 cut "https://www.youtube.com/watch?v=..." --start 12 --duration 4 --aspect 9:16
-npx -y github:Clypmint/clypmint-broll#v1.1.0 usage
+npx -y github:Clypmint/clypmint-broll#v1.2.0 search "Eiffel Tower" --type video
+npx -y github:Clypmint/clypmint-broll#v1.2.0 get "Notion" --type video --out notion.mp4   # records the live site
+npx -y github:Clypmint/clypmint-broll#v1.2.0 cut "https://www.youtube.com/watch?v=..." --start 12 --duration 4 --aspect 9:16
+npx -y github:Clypmint/clypmint-broll#v1.2.0 usage
 ```
 
 `cut` needs ffmpeg (and yt-dlp for YouTube, X or TikTok pages). `capture` and `get` for a live site use the Chrome, Edge, Brave or Chromium you already have. Every command takes `--json` for agents.
