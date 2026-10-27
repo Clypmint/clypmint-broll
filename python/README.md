@@ -1,7 +1,7 @@
 # clypmint-broll (Python)
 
 ```bash
-pip install "git+https://github.com/Clypmint/clypmint-broll@v1.1.0#subdirectory=python"
+pip install "git+https://github.com/Clypmint/clypmint-broll@v1.2.0#subdirectory=python"
 ```
 
 ```python

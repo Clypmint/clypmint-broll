@@ -50,13 +50,15 @@ class Broll:
                 payload = {}
             raise BrollError(error.code, payload.get("code", "error"), payload.get("message", str(error)))
 
-    def search(self, query, context=None, type=None, orientation=None, limit=None, min_score=None, rights=None, idempotency_key=None):
+    def search(self, query, context=None, type=None, orientation=None, limit=None, min_score=None, rights=None, keywords=None, names=None, look_for=None, idempotency_key=None):
         """One subject (and the script line it plays over) -> verified shots, best first.
 
         rights: "licensed" (default) or "any" (also the open web; those shots have license["cleared"] == False).
+        keywords, names, look_for: your own plan (1-3 word archive searches, the named things, what the right shot shows);
+        send them and the search skips its own planning step.
         """
         body = {"query": query}
-        for name, value in (("context", context), ("type", type), ("orientation", orientation), ("limit", limit), ("min_score", min_score), ("rights", rights)):
+        for name, value in (("context", context), ("type", type), ("orientation", orientation), ("limit", limit), ("min_score", min_score), ("rights", rights), ("keywords", keywords), ("names", names), ("look_for", look_for)):
             if value is not None:
                 body[name] = value
         return self._call("POST", "/api/v1/broll/search", body, idempotency_key)
