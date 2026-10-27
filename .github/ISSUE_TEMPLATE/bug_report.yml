@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in the CLI, a client or a plugin did not work.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Never paste your API key. For a security problem, follow SECURITY.md instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The command or call, what you expected, and what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The error, or the `--json` line. Remove anything private.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The output of `clypmint-broll --version`, or the tag you installed.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - CLI
+        - JavaScript client
+        - Python client
+        - Claude Code plugin
+        - Codex plugin
+        - MCP in another agent
+        - B-Roll Bench

@@ -16,7 +16,7 @@ import { capture } from './capture.mjs';
 import { BrollError, createClient } from './client.mjs';
 import { cut, download, MediaError, seconds } from './media.mjs';
 
-const VERSION = '1.1.0';
+const VERSION = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8')).version;
 
 function parse(argv) {
   const args = [];
@@ -57,10 +57,19 @@ function print(flags, value, human) {
 const shotLine = (s, i) =>
   `${String(i + 1).padStart(2)}. [${s.score ?? '?'}/10] ${s.type.padEnd(5)} ${s.license?.cleared === false ? 'NOT CLEARED ' : ''}${s.shows || s.title}\n     ${s.delivery === 'direct' ? (s.download_url ?? s.url) : `${s.cut_command}`}\n     ${s.license.name}${s.license.attribution ? ` | credit: ${s.license.attribution}` : ''}`;
 
+/** The seconds to cut from a video shot: --start / --duration when given, else the moment the search found (web mode
+ * returns it in cut_args), else the first 4 s. */
+export function clipOf(shot, flags = {}) {
+  const arg = (name) => {
+    const i = shot.cut_args?.indexOf(`--${name}`) ?? -1;
+    return i >= 0 ? shot.cut_args[i + 1] : undefined;
+  };
+  return { start: seconds(flags.start ?? arg('start') ?? 0, 'start'), duration: Number(flags.duration ?? arg('duration') ?? 4) };
+}
+
 async function makeFile(shot, flags) {
   if (shot.delivery === 'local_capture') return capture(shot.url, { duration: Number(flags.duration ?? 5), out: flags.out });
-  if (shot.type === 'video')
-    return cut(shot.url, { start: seconds(flags.start ?? 0), duration: Number(flags.duration ?? 4), out: flags.out, aspect: flags.aspect, fit: flags.fit });
+  if (shot.type === 'video') return cut(shot.url, { ...clipOf(shot, flags), out: flags.out, aspect: flags.aspect, fit: flags.fit });
   return download(shot.download_url ?? shot.url, { out: flags.out });
 }
 
@@ -76,8 +85,8 @@ async function readScript(arg) {
 export async function main(argv) {
   const { args, flags } = parse(argv);
   const [command, ...rest] = args;
-  if (!command || flags.help || command === 'help') return void process.stdout.write(`${HELP}\n`);
   if (flags.version || command === 'version') return void process.stdout.write(`${VERSION}\n`);
+  if (!command || flags.help || command === 'help') return void process.stdout.write(`${HELP}\n`);
   const num = (v) => (v === undefined ? undefined : Number(v));
 
   if (command === 'search' || command === 'get') {

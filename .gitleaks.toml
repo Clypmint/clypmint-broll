@@ -1,0 +1,12 @@
+# gitleaks runs in CI on every pull request and every push to main (.github/workflows/ci.yml).
+# The default rules cover keys from AWS, GitHub, Google, OpenAI, Stripe and many more. The rule below adds Clypmint's
+# own API keys. Placeholders such as cm_live_... and cm_live_YOUR_KEY are too short to match it.
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "clypmint-api-key"
+description = "Clypmint API key"
+regex = '''cm_live_[A-Za-z0-9_-]{40,}'''
+keywords = ["cm_live_"]

@@ -1,6 +1,6 @@
 {
   "name": "@clypmint/broll",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Real, verified b-roll for video agents: the Clypmint B-Roll API client, MCP setup, and a CLI that cuts clips and records live sites on your machine.",
   "type": "module",
   "license": "MIT",

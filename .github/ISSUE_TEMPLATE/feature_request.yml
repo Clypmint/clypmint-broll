@@ -1,0 +1,15 @@
+name: Feature request
+description: Something the API, the CLI or a plugin should do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: want
+    attributes:
+      label: What you want to do
+      description: The video or the agent you are building, and the shot you could not get.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How it could work
