@@ -3,13 +3,14 @@
 //   tsx harness.mjs run [providers] --engine=<checkout>/apps/web/src/lib/broll [--rights=any] --tag=<tag>   (the engine in-process)
 //   tsx harness.mjs judge --tag=<tag>   (needs sharp, ffmpeg and yt-dlp; the CLI is this repository's own, or CLYPMINT_WT's)
 // A Clypmint search through the API is billed like any other ($0.02 licensed, $0.06 web; see clypmint.com/broll).
+// --concurrency=N runs N requests at once (default 2: more and Google refuses a share of the engine's video watches on one key)
+// and judges N sheets at once (default 16); every frame cut is one of at most 10 yt-dlp/ffmpeg processes at a time.
 // Every provider answers the same 100 requests (queries.json). One judge model, blind to the provider, looks at what each
 // result shows: a photo's own thumbnail, a video's thumbnail, and for a moment inside a video (Clypmint web mode) the frame
 // at the middle of that moment, cut the way the customer's CLI cuts it (yt-dlp + ffmpeg); for a live site, a frame of
 // the CLI's own recording of it (local Chrome).
 // Keys come from the environment and are never printed or written.
-// Keys come from the environment and are never printed or written.
-import { execFileSync, spawnSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { homedir } from 'node:os';
@@ -138,15 +139,15 @@ async function runPhase() {
   const ctx = { keys, engine };
   const names = args.length ? args : Object.keys(P);
   const raw = load(rawFile);
-  for (const q of queries) for (const name of names) {
+  const todo = queries.flatMap((q) => names.map((name) => [q, name])).filter(([q, name]) => !(raw[`${name}|${q.id}`] && !raw[`${name}|${q.id}`].error));
+  await pool(todo, Number(flags.concurrency || 2), async ([q, name]) => {
     const k = `${name}|${q.id}`;
-    if (raw[k] && !raw[k].error) continue;
     try { raw[k] = { provider: name, qid: q.id, ...(await P[name].run(q, ctx)) }; }
     catch (err) { raw[k] = { provider: name, qid: q.id, error: String(err.message || err), results: [], latency_ms: null, video_available: false }; }
     raw[k].cost_usd = P[name].cost(raw[k]);
     save(rawFile, raw);
     console.log(k, raw[k].error ? 'ERR ' + raw[k].error : `${raw[k].results.length} results ${raw[k].latency_ms}ms`);
-  }
+  });
 }
 
 // ---------- judge ----------
@@ -180,22 +181,52 @@ Judge mainly what you SEE; a caption alone does not prove the picture shows the 
 - visible: false if the tile is blank or unreadable.
 Reply JSON only: {"items":[{"n":1,"exact_subject":false,"real_media":true,"visible":true,"note":"under 10 words"}]}`;
 /** A moment inside a YouTube video: the frame at its middle, as the customer's cut command would produce it. */
+// a child process that never blocks the others (spawnSync held every judge call while one frame was cut), 10 at a time
+let procs = 0;
+const waiting = [];
+const runP = async (cmd, args, opts) => {
+  while (procs >= 10) await new Promise((r) => waiting.push(r));
+  procs++;
+  try { return await runChild(cmd, args, opts); } finally { procs--; waiting.shift()?.(); }
+};
+const runChild = (cmd, args, { timeout = 60000 } = {}) => new Promise((resolve) => {
+  const p = spawn(cmd, args, { stdio: ['ignore', 'pipe', 'ignore'] });
+  let stdout = '';
+  p.stdout.on('data', (d) => (stdout += d));
+  const t = setTimeout(() => p.kill('SIGKILL'), timeout);
+  p.on('close', () => { clearTimeout(t); resolve({ stdout }); });
+  p.on('error', () => { clearTimeout(t); resolve({ stdout }); });
+});
+// N at once over a list, in order of the list, each item's work awaited
+const pool = async (items, n, work) => { let i = 0; await Promise.all(Array.from({ length: Math.max(1, n) }, async () => { while (i < items.length) await work(items[i++]); })); };
+
+// a video's stream address, asked of yt-dlp once: the moments of one video share it
+const streams = new Map();
+const streamOf = (url) => {
+  if (!streams.has(url)) streams.set(url, runP('yt-dlp', ['-q', '--no-warnings', '-f', 'bv*[height<=720]/b', '-g', url], { timeout: 60000 }).then((g) => (g.stdout || '').trim().split('\n')[0] || null));
+  return streams.get(url);
+};
+
+const frames = new Map(); // one cut per frame file, whichever sheets show that moment
 function momentFrame(x) {
   if (!x.cut || x.cut[0] !== 'cut' || !/youtube\.com|youtu\.be/.test(x.url)) return null;
   const start = Number(x.cut[x.cut.indexOf('--start') + 1]), dur = Number(x.cut[x.cut.indexOf('--duration') + 1]);
   const file = path.join(OUTD || HERE, 'judge/frames', `${x.url.split('v=')[1]?.slice(0, 11)}-${start}.jpg`);
-  if (existsSync(file)) return readFileSync(file);
-  mkdirSync(path.dirname(file), { recursive: true });
-  for (let a = 0; a < 2; a++) {
-    const g = spawnSync('yt-dlp', ['-q', '--no-warnings', '-f', 'bv*[height<=720]/b', '-g', x.url], { encoding: 'utf8', timeout: 60000 });
-    const src = (g.stdout || '').trim().split('\n')[0];
-    if (src) spawnSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(start + dur / 2), '-i', src, '-frames:v', '1', '-vf', 'scale=-2:540,format=yuvj420p', '-q:v', '3', file], { timeout: 90000 });
+  if (!frames.has(file)) frames.set(file, (async () => {
     if (existsSync(file)) return readFileSync(file);
-  }
-  return null;
+    mkdirSync(path.dirname(file), { recursive: true });
+    for (let a = 0; a < 2; a++) {
+      const src = await streamOf(x.url);
+      if (src) await runP('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-ss', String(start + dur / 2), '-i', src, '-frames:v', '1', '-vf', 'scale=-2:540,format=yuvj420p', '-q:v', '3', file], { timeout: 90000 });
+      if (existsSync(file)) return readFileSync(file);
+      streams.delete(x.url); // the next try asks yt-dlp again
+    }
+    return null;
+  })());
+  return frames.get(file);
 }
 /** A live site the customer records with the CLI's capture command: a frame of that recording (local Chrome + ffmpeg). */
-function captureFrame(x) {
+async function captureFrame(x) {
   if (!x.cut || x.cut[0] !== 'capture') return null;
   const id = x.url.replace(/[^a-z0-9]+/gi, '-').slice(0, 60);
   const file = path.join(OUTD || HERE, 'judge/frames', `capture-${id}.jpg`);
@@ -204,19 +235,18 @@ function captureFrame(x) {
   const mp4 = file.replace(/\.jpg$/, '.mp4');
   // the CLI that cuts a moment the way a customer's does: the public repository's own (../../bin), or a Clypmint checkout's
   const cli = WT ? path.join(WT, 'integrations/broll/bin/clypmint-broll.mjs') : path.join(HERE, '../../bin/clypmint-broll.mjs');
-  spawnSync(process.execPath, [cli, 'capture', x.url, '--duration', '2', '--out', mp4], { timeout: 90000 });
-  if (existsSync(mp4)) spawnSync('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-ss', '1', '-i', mp4, '-frames:v', '1', '-vf', 'scale=-2:540,format=yuvj420p', '-q:v', '3', file], { timeout: 60000 });
+  await runP(process.execPath, [cli, 'capture', x.url, '--duration', '2', '--out', mp4], { timeout: 90000 });
+  if (existsSync(mp4)) await runP('ffmpeg', ['-hide_banner', '-loglevel', 'error', '-y', '-ss', '1', '-i', mp4, '-frames:v', '1', '-vf', 'scale=-2:540,format=yuvj420p', '-q:v', '3', file], { timeout: 60000 });
   return existsSync(file) ? readFileSync(file) : null;
 }
 async function judgePhase() {
   const key = secret('GEMINI_API_KEY');
   const sharp = createRequire(WT ? path.join(WT, 'apps/web/package.json') : path.join(HERE, 'package.json'))('sharp');
   const raw = load(rawFile), out = load(judgeFile);
-  for (const [k, r] of Object.entries(raw)) {
-    if (out[k] || !r.results.length) continue;
+  const todo = Object.entries(raw).filter(([k, r]) => !out[k] && r.results.length);
+  await pool(todo, Number(flags.concurrency || 16), async ([k, r]) => {
     const q = queries.find((x) => x.id === r.qid);
-    const bytes = [];
-    for (const x of r.results) bytes.push(momentFrame(x) || captureFrame(x) || (x.thumb && (await thumbBytes(x.thumb))) || (x.thumb2 && (await thumbBytes(x.thumb2))) || null);
+    const bytes = await Promise.all(r.results.map(async (x) => (await momentFrame(x)) || (await captureFrame(x)) || (x.thumb && (await thumbBytes(x.thumb))) || (x.thumb2 && (await thumbBytes(x.thumb2))) || null));
     const sheet = await sheetOf(bytes, sharp);
     writeFileSync(path.join(OUTD || HERE, 'judge/sheets', `${k.replace('|', '_')}${TAG ? '-' + TAG : ''}.jpg`), sheet);
     const body = { contents: [{ role: 'user', parts: [{ text: judgePrompt(q, r.results.map((x) => x.title)) }, { inline_data: { mime_type: 'image/jpeg', data: sheet.toString('base64') } }] }], generationConfig: { temperature: 0, responseMimeType: 'application/json', thinkingConfig: { thinkingBudget: 1024 } } };
@@ -232,6 +262,6 @@ async function judgePhase() {
     out[k] = { items: r.results.map((_, i) => { const it = (items || []).find((x) => Number(x.n) === i + 1) || {}; return { exact_subject: !!it.exact_subject && it.visible !== false && !!bytes[i], real_media: !!it.real_media && it.visible !== false && !!bytes[i], thumb_loaded: !!bytes[i], note: it.note || '' }; }), judge_failed: !items, tokens: usage ? { in: usage.promptTokenCount, out: (usage.candidatesTokenCount || 0) + (usage.thoughtsTokenCount || 0) } : null };
     save(judgeFile, out);
     console.log('judged', k, out[k].judge_failed ? 'FAILED' : out[k].items.map((i) => (i.exact_subject ? 'Y' : 'n') + (i.real_media ? 'r' : '-')).join(' '));
-  }
+  });
 }
 if (phase === 'run') await runPhase(); else if (phase === 'judge') await judgePhase();

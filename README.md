@@ -244,7 +244,7 @@ Web mode (`"rights": "any"`) adds the open web: the scene from the film, the pho
 
 **Does it work for vertical video?** Pass `"orientation": "portrait"` to rank vertical shots first, and `cut --aspect 9:16` to fit any clip (contain by default, `--fit cover` to crop).
 
-**How fast is it?** A licensed search answers in about 5 seconds and a web search in about 7 (bench medians).
+**How fast is it?** A licensed search answers in about 4 seconds and a web search in about 6 (bench medians). A licensed search stops by 10 seconds and a web search by 20.
 
 ## What's in this repository
 
