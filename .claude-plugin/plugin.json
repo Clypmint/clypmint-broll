@@ -1,13 +1,29 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "clypmint-broll",
   "displayName": "Clypmint B-Roll",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Real, verified b-roll for any video your agent makes: find_broll and plan_broll over MCP, and a skill that sources, places and credits each shot.",
-  "author": { "name": "Clypmint", "url": "https://clypmint.com" },
+  "author": {
+    "name": "Clypmint",
+    "email": "support@clypmint.com",
+    "url": "https://clypmint.com"
+  },
   "homepage": "https://clypmint.com/broll",
+  "privacyPolicyUrl": "https://clypmint.com/legal/privacy",
   "repository": "https://github.com/Clypmint/clypmint-broll",
   "license": "MIT",
-  "keywords": ["b-roll", "broll", "video", "footage", "mcp", "agents"],
+  "icon": "./docs/assets/logo.png",
+  "keywords": [
+    "b-roll",
+    "broll",
+    "video",
+    "footage",
+    "stock-footage",
+    "video-editing",
+    "mcp",
+    "agents"
+  ],
   "userConfig": {
     "api_key": {
       "type": "string",

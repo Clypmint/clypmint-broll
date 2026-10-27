@@ -1,0 +1,37 @@
+{
+  "name": "clypmint-broll",
+  "version": "1.2.1",
+  "description": "B-roll of anything for your agent: real photos and footage of the person, company, place or event a script names, checked by a vision model, with the rights.",
+  "author": {
+    "name": "Clypmint",
+    "email": "support@clypmint.com",
+    "url": "https://clypmint.com"
+  },
+  "homepage": "https://clypmint.com/broll",
+  "repository": "https://github.com/Clypmint/clypmint-broll",
+  "license": "MIT",
+  "keywords": ["b-roll", "broll", "video", "footage", "stock-footage", "video-editing", "mcp", "agents"],
+  "skills": "./skills/",
+  "mcpServers": "./.codex-mcp.json",
+  "interface": {
+    "displayName": "Clypmint B-Roll",
+    "shortDescription": "B-roll of anything for your videos",
+    "longDescription": "Find real photos and footage of the exact person, company, product, place or event a script names. One search covers Wikimedia Commons, NASA, the Internet Archive, the Library of Congress, Openverse and official channels, and web mode finds the moment inside a YouTube video. A vision model checks every shot, and every shot comes with its license and credit line. Needs a Clypmint API key in CLYPMINT_API_KEY.",
+    "developerName": "Clypmint",
+    "category": "Creativity",
+    "capabilities": ["Interactive", "Read"],
+    "websiteURL": "https://clypmint.com/broll",
+    "supportURL": "https://clypmint.com/support",
+    "privacyPolicyURL": "https://clypmint.com/legal/privacy",
+    "termsOfServiceURL": "https://clypmint.com/legal/terms",
+    "defaultPrompt": [
+      "Find b-roll for every name in this script.",
+      "Get a 4 second clip of the Saturn V launch.",
+      "Find a photo of Sam Altman I can use commercially."
+    ],
+    "brandColor": "#111111",
+    "brandColorDark": "#FFFFFF",
+    "composerIcon": "./docs/assets/logo.png",
+    "logo": "./docs/assets/logo.png"
+  }
+}

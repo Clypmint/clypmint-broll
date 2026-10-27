@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "clypmint-broll": {
+      "url": "https://clypmint.com/mcp/broll",
+      "bearer_token_env_var": "CLYPMINT_API_KEY"
+    }
+  }
+}

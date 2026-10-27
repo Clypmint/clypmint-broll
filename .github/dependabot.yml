@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # The GitHub Actions CI uses, each pinned to a commit. The JavaScript and Python code has no dependencies.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    labels: [dependencies]
