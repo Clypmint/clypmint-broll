@@ -9,6 +9,8 @@ Notable changes to clypmint-broll. Dates are release dates. The format follows
 
 - Every new account gets 100 free searches. The README and the skill say so, and the README shows its star, license and
   MCP registry badges.
+- The README's tool table says what each tool is for, which to use when, and what it costs. The MCP server now lists
+  its tools to any MCP client before a key is added (directories could not read them); a search still needs a key.
 
 ## 1.2.1 (2026-10-27)
 
