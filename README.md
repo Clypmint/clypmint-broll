@@ -124,15 +124,16 @@ Or copy [`skills/broll/SKILL.md`](skills/broll/SKILL.md) into your agent's skill
 `~/.claude/skills/broll/SKILL.md`).
 </details>
 
-The MCP server is `https://clypmint.com/mcp/broll`, listed on the official MCP registry as `com.clypmint/broll`.
+The MCP server is `https://clypmint.com/mcp/broll`, listed on the official MCP registry as `com.clypmint/broll`. Any MCP
+client can list its tools before you add a key; a search needs one.
 
 ### What your agent gets
 
 | Tool | What your agent can do |
 |---|---|
-| `find_broll` | Send a subject and the line it plays over. Get checked shots, best first. |
-| `plan_broll` | Send a whole script. Get every moment worth a cutaway, each with its shots. |
-| `broll_usage` | See the balance, this month's spend and the prices. |
+| `find_broll` | Send one subject (a person, company, product, app, place, event or scene) and the line it plays over. Get checked shots, best first, each with its license. For a whole script, use `plan_broll`. Charged only when checked shots come back. |
+| `plan_broll` | Send a whole script. Get every moment worth a cutaway, with the words it starts on and its shots. Each moment is charged like one `find_broll` search, only when it finds checked shots. |
+| `broll_usage` | See the balance, this month's spend, whether auto top-up is on, and the prices. Free. |
 | [`broll` skill](skills/broll/SKILL.md) | Source, cut, place and credit each shot. |
 
 ## Using Claude to edit videos?
