@@ -22,7 +22,7 @@ Built by [Clypmint](https://clypmint.com) for its AI video editor, and open to e
 
 ## Why it exists
 
-Video agents are good at scripts and voices and bad at pictures. Stock shows *a* CEO; your script names *the* CEO.
+Video agents are good at scripts and voices and bad at pictures. Stock shows _a_ CEO; your script names _the_ CEO.
 Image search gives you links with no license. And an agent can't watch a video to find the four seconds it needs.
 
 This does the part an editor does:
@@ -35,18 +35,18 @@ This does the part an editor does:
 4. **Drop it in.** Each image has a `download_url`. Each video has one command that cuts just the seconds you need, on
    your machine.
 
-| You ask for | You get |
-|---|---|
-| `Sam Altman` | Licensed portraits of Sam Altman, scored 9-10, with the credit line |
-| `booster` + "SpaceX just landed the booster again" | Public-domain footage of a Falcon 9 booster landing |
-| `Notion` + "I plan every video in Notion" | The live notion.com site, recorded on your machine |
-| A scene from a film, in web mode | The moment in the video, with a start, an end and a command that cuts it, marked Not cleared |
+| You ask for                                        | You get                                                                                      |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Sam Altman`                                       | Licensed portraits of Sam Altman, scored 9-10, with the credit line                          |
+| `booster` + "SpaceX just landed the booster again" | Public-domain footage of a Falcon 9 booster landing                                          |
+| `Notion` + "I plan every video in Notion"          | The live notion.com site, recorded on your machine                                           |
+| A scene from a film, in web mode                   | The moment in the video, with a start, an end and a command that cuts it, marked Not cleared |
 
 ## Two kinds of search, one key
 
 - **Licensed** (the default, $0.02). Only sources whose terms allow reuse. Every shot has its license and credit line.
 - **Web** (`"rights": "any"`, $0.06). Also the open web: the scene from the film, the photo from yesterday's news, the
-  moment inside a YouTube video. These shots come back marked *Not cleared*, because the owner holds the rights.
+  moment inside a YouTube video. These shots come back marked _Not cleared_, because the owner holds the rights.
 
 A search is only charged when it finds checked shots.
 
@@ -68,7 +68,7 @@ claude mcp add --transport http clypmint-broll https://clypmint.com/mcp/broll \
 npx -y github:Clypmint/clypmint-broll#v1.2.1 search "Saturn V launch" --type video
 ```
 
-Then ask your agent: *"find b-roll for every name in this script."* Every CLI command is in [USAGE.md](USAGE.md).
+Then ask your agent: _"find b-roll for every name in this script."_ Every CLI command is in [USAGE.md](USAGE.md).
 
 ### Or install it as a Claude Code plugin
 
@@ -103,6 +103,7 @@ The Codex plugin reads your key from `CLYPMINT_API_KEY`.
   }
 }
 ```
+
 </details>
 
 <details><summary>Codex without the plugin (<code>~/.codex/config.toml</code>)</summary>
@@ -112,6 +113,7 @@ The Codex plugin reads your key from `CLYPMINT_API_KEY`.
 url = "https://clypmint.com/mcp/broll"
 bearer_token_env_var = "CLYPMINT_API_KEY"
 ```
+
 </details>
 
 <details><summary>Any agent that reads skills</summary>
@@ -129,12 +131,12 @@ client can list its tools before you add a key; a search needs one.
 
 ### What your agent gets
 
-| Tool | What your agent can do |
-|---|---|
-| `find_broll` | Send one subject (a person, company, product, app, place, event or scene) and the line it plays over. Get checked shots, best first, each with its license. For a whole script, use `plan_broll`. Charged only when checked shots come back. |
-| `plan_broll` | Send a whole script. Get every moment worth a cutaway, with the words it starts on and its shots. Each moment is charged like one `find_broll` search, only when it finds checked shots. |
-| `broll_usage` | See the balance, this month's spend, whether auto top-up is on, and the prices. Free. |
-| [`broll` skill](skills/broll/SKILL.md) | Source, cut, place and credit each shot. |
+| Tool                                   | What your agent can do                                                                                                                                                                                                                       |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `find_broll`                           | Send one subject (a person, company, product, app, place, event or scene) and the line it plays over. Get checked shots, best first, each with its license. For a whole script, use `plan_broll`. Charged only when checked shots come back. |
+| `plan_broll`                           | Send a whole script. Get every moment worth a cutaway, with the words it starts on and its shots. Each moment is charged like one `find_broll` search, only when it finds checked shots.                                                     |
+| `broll_usage`                          | See the balance, this month's spend, whether auto top-up is on, and the prices. Free.                                                                                                                                                        |
+| [`broll` skill](skills/broll/SKILL.md) | Source, cut, place and credit each shot.                                                                                                                                                                                                     |
 
 ## Using Claude to edit videos?
 
@@ -182,7 +184,11 @@ curl https://clypmint.com/api/v1/broll/search \
   "interpreted": {
     "subject": "Sam Altman",
     "kind": "person",
-    "entity": { "id": "Q7407093", "label": "Sam Altman", "url": "https://www.wikidata.org/wiki/Q7407093" },
+    "entity": {
+      "id": "Q7407093",
+      "label": "Sam Altman",
+      "url": "https://www.wikidata.org/wiki/Q7407093"
+    },
     "look_for": "Sam Altman walking onto a stage at a conference or event"
   },
   "verified": true,
@@ -195,7 +201,10 @@ curl https://clypmint.com/api/v1/broll/search \
       "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Sam_Altman_speaking_at_TED.jpg",
       "download_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Sam_Altman_speaking_at_TED.jpg/1920px-Sam_Altman_speaking_at_TED.jpg",
       "orientation": "portrait",
-      "source": { "name": "Wikimedia Commons", "page_url": "https://commons.wikimedia.org/wiki/File:Sam_Altman_speaking_at_TED.jpg" },
+      "source": {
+        "name": "Wikimedia Commons",
+        "page_url": "https://commons.wikimedia.org/wiki/File:Sam_Altman_speaking_at_TED.jpg"
+      },
       "license": {
         "name": "CC BY 2.0",
         "url": "https://creativecommons.org/licenses/by/2.0",
@@ -213,7 +222,11 @@ curl https://clypmint.com/api/v1/broll/search \
     "balance_usd": 9.99,
     "price_usd": { "licensed": 0.01, "web": 0.03 },
     "list_price_usd": { "licensed": 0.02, "web": 0.06 },
-    "offer": { "label": "Launch week: 50% off every search through Nov 2", "percent_off": 50, "ends_at": "2026-11-03T07:59:59Z" }
+    "offer": {
+      "label": "Launch week: 50% off every search through Nov 2",
+      "percent_off": 50,
+      "ends_at": "2026-11-03T07:59:59Z"
+    }
   }
 }
 ```
@@ -242,7 +255,10 @@ npm install github:Clypmint/clypmint-broll#v1.2.1
 import { createClient } from '@clypmint/broll';
 
 const broll = createClient(); // reads CLYPMINT_API_KEY
-const { results, usage } = await broll.search({ query: 'Figma', context: 'we design everything in Figma' });
+const { results, usage } = await broll.search({
+  query: 'Figma',
+  context: 'we design everything in Figma',
+});
 ```
 
 **Python**
@@ -266,10 +282,10 @@ script to a folder of b-roll, are in [examples/](examples).
 You pay per search from a prepaid balance, the way search APIs charge: one price per call, stated before you call, and
 only a search that finds checked shots is charged.
 
-| | Price | Per 1,000 | Launch week (through Nov 2) |
-|---|---|---|---|
-| Licensed search (default) | $0.02 | $20 | $0.01 |
-| Web search (`"rights": "any"`) | $0.06 | $60 | $0.03 |
+|                                | Price | Per 1,000 | Launch week (through Nov 2) |
+| ------------------------------ | ----- | --------- | --------------------------- |
+| Licensed search (default)      | $0.02 | $20       | $0.01                       |
+| Web search (`"rights": "any"`) | $0.06 | $60       | $0.03                       |
 
 The launch discount ends at `2026-11-03T07:59:59Z` (November 2, 11:59:59 p.m. Pacific; November 3, 1:59:59 a.m. Chicago). Regular prices apply at that instant. Existing dollar balances do not change. `GET /usage` gives the current prices.
 
@@ -291,14 +307,14 @@ archival moments, generic scenes, film and TV scenes) sent to every service, the
 Gemini 3.5 Flash and Claude Sonnet 5.5 (they agreed on 87.2% of first results). Clypmint run Oct 26, 2026, with its
 engine as it is live; the other services Oct 25, 2026.
 
-| Service | Right shot first | Right shot in top 5 | Median time | Price per 1,000 | Rights |
-|---|---|---|---|---|---|
-| **Clypmint, web mode** | **56.5%** | **75%** | 6.7 s | $60 | Marked not cleared |
-| **Clypmint, licensed** | 46% | 48% | 3.7 s | $20 | Licensed, with credit line |
-| Brave image search | 45.5% | 74.5% | 0.7 s | $5 | No license data |
-| Pexels | 19.5% | 28.5% | 0.4 s | Free | Stock license |
-| Wikimedia Commons search | 8.5% | 10% | 0.4 s | Free | Licensed |
-| Openverse | 6% | 7.5% | 1.8 s | Free | Licensed |
+| Service                  | Right shot first | Right shot in top 5 | Median time | Price per 1,000 | Rights                     |
+| ------------------------ | ---------------- | ------------------- | ----------- | --------------- | -------------------------- |
+| **Clypmint, web mode**   | **56.5%**        | **75%**             | 6.7 s       | $60             | Marked not cleared         |
+| **Clypmint, licensed**   | 46%              | 48%                 | 3.7 s       | $20             | Licensed, with credit line |
+| Brave image search       | 45.5%            | 74.5%               | 0.7 s       | $5              | No license data            |
+| Pexels                   | 19.5%            | 28.5%               | 0.4 s       | Free            | Stock license              |
+| Wikimedia Commons search | 8.5%             | 10%                 | 0.4 s       | Free            | Licensed                   |
+| Openverse                | 6%               | 7.5%                | 1.8 s       | Free            | Licensed                   |
 
 On the 85 people, companies, places, events, archival moments and generic scenes, licensed mode got the right shot
 first 54.2% of the time, against 44.7% for Brave, with a license on every shot. Answers vary from run to run by up to 6
@@ -331,7 +347,7 @@ how you use what you publish.
 
 ## FAQ
 
-**Is this a stock library?** No. Stock shows *a* CEO. This shows *the* CEO your script names. For generic scenes it
+**Is this a stock library?** No. Stock shows _a_ CEO. This shows _the_ CEO your script names. For generic scenes it
 finds real, freely licensed photos and footage.
 
 **What does "verified" mean?** A vision model saw every candidate and scored it against what the shot must show.
@@ -352,16 +368,16 @@ CLI has no dependencies, and release tags here are locked. See [SECURITY.md](SEC
 
 ## What's here
 
-| Path | What it is |
-|---|---|
-| [`src/`](src), [`bin/`](bin) | The JavaScript client and the `clypmint-broll` CLI |
-| [`python/`](python) | The Python client |
-| [`skills/broll/`](skills/broll) | The agent skill: how to source, place and credit b-roll |
-| [`.claude-plugin/`](.claude-plugin), [`.mcp.json`](.mcp.json) | The Claude Code plugin and its marketplace |
-| [`.codex-plugin/`](.codex-plugin), [`.codex-mcp.json`](.codex-mcp.json) | The Codex plugin |
-| [`examples/`](examples) | Runnable examples: a script to a folder of b-roll (Node, Python), curl, and a Claude video setup |
-| [`bench/v1/`](bench/v1) | B-Roll Bench v1: the 100 requests, the harness, the judge prompts and every result |
-| [`test/`](test) | Tests for the CLI, the client, the examples and the plugin files |
+| Path                                                                    | What it is                                                                                       |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`src/`](src), [`bin/`](bin)                                            | The JavaScript client and the `clypmint-broll` CLI                                               |
+| [`python/`](python)                                                     | The Python client                                                                                |
+| [`skills/broll/`](skills/broll)                                         | The agent skill: how to source, place and credit b-roll                                          |
+| [`.claude-plugin/`](.claude-plugin), [`.mcp.json`](.mcp.json)           | The Claude Code plugin and its marketplace                                                       |
+| [`.codex-plugin/`](.codex-plugin), [`.codex-mcp.json`](.codex-mcp.json) | The Codex plugin                                                                                 |
+| [`examples/`](examples)                                                 | Runnable examples: a script to a folder of b-roll (Node, Python), curl, and a Claude video setup |
+| [`bench/v1/`](bench/v1)                                                 | B-Roll Bench v1: the 100 requests, the harness, the judge prompts and every result               |
+| [`test/`](test)                                                         | Tests for the CLI, the client, the examples and the plugin files                                 |
 
 The search engine itself runs as a hosted service at clypmint.com. It is not in this repository.
 
