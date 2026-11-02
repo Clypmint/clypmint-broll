@@ -16,7 +16,7 @@ the keynote shows the first iPhone. Send the line from your script and get the s
 Built by [Clypmint](https://clypmint.com) for its AI video editor, and open to every agent and every video app. Live at
 [clypmint.com/broll](https://clypmint.com/broll).
 
-> **Your first 100 searches are free.** Then $0.02 a licensed search, $0.06 a web search, half price through Nov 2.
+> **Start with $2 of signup credit after verifying your email.** Then $0.02 a licensed search, $0.06 a web search, half price until the fixed cutoff, November 3, 2026 at 07:59:59 UTC (November 2 at 11:59:59 p.m. Pacific).
 > [Get a key](https://clypmint.com/broll/dashboard) · [Try it in the browser](https://clypmint.com/broll) (no key) ·
 > [Docs](https://clypmint.com/broll/docs) · [Benchmark](https://clypmint.com/broll/benchmarks)
 
@@ -57,7 +57,7 @@ A search is only charged when it finds checked shots.
 ## Quickstart
 
 ```bash
-# 1. sign up and make a key (your first 100 searches are free): https://clypmint.com/broll/dashboard
+# 1. sign up and make a key ($2 signup credit after email verification): https://clypmint.com/broll/dashboard
 export CLYPMINT_API_KEY=cm_live_...
 
 # 2. give it to your agent (Claude Code)
@@ -271,8 +271,11 @@ only a search that finds checked shots is charged.
 | Licensed search (default) | $0.02 | $20 | $0.01 |
 | Web search (`"rights": "any"`) | $0.06 | $60 | $0.03 |
 
+The launch discount ends at `2026-11-03T07:59:59Z` (November 2, 11:59:59 p.m. Pacific; November 3, 1:59:59 a.m. Chicago). Regular prices apply at that instant. Existing dollar balances do not change. `GET /usage` gives the current prices.
+
 - A search that finds nothing, only near matches, or shots that could not be checked costs nothing.
-- Every new account gets 100 free searches ($2 of credit), once.
+- If `usage.charged_usd` is `null` with `billing_status: "pending"`, billing could not be confirmed. Check usage before retrying; do not interpret it as a zero charge.
+- A verified new account gets $2 of signup credit once, subject to the daily signup cap. That covers 100 licensed or 33 web searches at regular prices (200 licensed or 66 web searches during the launch discount).
 - Top up from $10 (to $1,000 at a time). Your balance never expires. Turn on auto top-up and we add the amount you pick
   when it runs low.
 - Any balance you have not used can be refunded within 14 days of adding it.
