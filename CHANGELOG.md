@@ -9,6 +9,7 @@ Notable changes to clypmint-broll. Dates are release dates. The format follows
 
 - Clarify the $2 signup credit after email verification and the fixed launch-discount expiry on November 3, 2026
   at 07:59:59 UTC. Regular prices are $0.02 per licensed search and $0.06 per web search; dollar balances stay unchanged.
+- Label response examples as regular-price snapshots and remove the expired launch offer from the README example.
 - The README's tool table says what each tool is for, which to use when, and what it costs. The MCP server now lists
   its tools to any MCP client before a key is added (directories could not read them); a search still needs a key.
 

@@ -177,6 +177,8 @@ curl https://clypmint.com/api/v1/broll/search \
   -d '{"query": "Sam Altman", "context": "Sam Altman just walked on stage", "type": "image", "limit": 1}'
 ```
 
+Example response at regular prices:
+
 ```json
 {
   "request_id": "2b9d7f0e-6c1a-4f53-9d0e-6a1f3c8e2b41",
@@ -218,15 +220,11 @@ curl https://clypmint.com/api/v1/broll/search \
   "took_ms": 4810,
   "cached": false,
   "usage": {
-    "charged_usd": 0.01,
-    "balance_usd": 9.99,
-    "price_usd": { "licensed": 0.01, "web": 0.03 },
+    "charged_usd": 0.02,
+    "balance_usd": 9.98,
+    "price_usd": { "licensed": 0.02, "web": 0.06 },
     "list_price_usd": { "licensed": 0.02, "web": 0.06 },
-    "offer": {
-      "label": "Launch week: 50% off every search through Nov 2",
-      "percent_off": 50,
-      "ends_at": "2026-11-03T07:59:59Z"
-    }
+    "offer": null
   }
 }
 ```
