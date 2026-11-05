@@ -172,7 +172,7 @@ export async function run(argv) {
     const known = error instanceof BrollError || error instanceof MediaError;
     const json = argv.includes('--json');
     const message = known ? error.message : String(error?.stack || error);
-    if (json) process.stdout.write(`${JSON.stringify({ error: { code: error.code ?? 'error', status: error.status ?? null, message } })}\n`);
+    if (json) process.stdout.write(`${JSON.stringify({ error: { code: error.code ?? 'error', status: error.status ?? null, message, ...(error.requestId ? { request_id: error.requestId } : {}) } })}\n`);
     else process.stderr.write(`clypmint-broll: ${message}\n`);
     process.exitCode = 1;
   }
