@@ -5,6 +5,12 @@ Notable changes to clypmint-broll. Dates are release dates. The format follows
 
 ## Unreleased
 
+### Security and diagnostics
+
+- Reject authenticated API redirects in both clients; cover redirect destinations with local-server regression tests.
+- Expose API error request IDs, omit raw non-JSON response bodies from errors, and document safe troubleshooting.
+- Add weekly secret and workflow checks, ownership routing, and visible CI links; remove the expired launch offer from the introduction.
+
 ### Changed
 
 - Clarify the $2 signup credit after email verification and the fixed launch-discount expiry on November 3, 2026

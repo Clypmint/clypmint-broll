@@ -1,5 +1,7 @@
 # Clypmint B-Roll (b-roll of anything, for any agent)
 
+[![CI](https://github.com/Clypmint/clypmint-broll/actions/workflows/ci.yml/badge.svg)](https://github.com/Clypmint/clypmint-broll/actions/workflows/ci.yml) [![Security checks](https://github.com/Clypmint/clypmint-broll/actions/workflows/repository-security.yml/badge.svg)](https://github.com/Clypmint/clypmint-broll/actions/workflows/repository-security.yml)
+
 [![GitHub stars](https://img.shields.io/github/stars/Clypmint/clypmint-broll?style=social)](https://github.com/Clypmint/clypmint-broll/stargazers) [![MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE) [![MCP registry](https://img.shields.io/badge/MCP-com.clypmint%2Fbroll-black)](https://registry.modelcontextprotocol.io)
 
 ![An agent asks for b-roll; the API finds real footage, scores every shot and checks every license](docs/assets/hero.gif)
@@ -16,7 +18,7 @@ the keynote shows the first iPhone. Send the line from your script and get the s
 Built by [Clypmint](https://clypmint.com) for its AI video editor, and open to every agent and every video app. Live at
 [clypmint.com/broll](https://clypmint.com/broll).
 
-> **Start with $2 of signup credit after verifying your email.** Then $0.02 a licensed search, $0.06 a web search, half price until the fixed cutoff, November 3, 2026 at 07:59:59 UTC (November 2 at 11:59:59 p.m. Pacific).
+> **Start with $2 of signup credit after verifying your email.** Then $0.02 per licensed search or $0.06 per web search. Check current prices with the usage endpoint.
 > [Get a key](https://clypmint.com/broll/dashboard) · [Try it in the browser](https://clypmint.com/broll) (no key) ·
 > [Docs](https://clypmint.com/broll/docs) · [Benchmark](https://clypmint.com/broll/benchmarks)
 
@@ -387,6 +389,10 @@ cd python && PYTHONPATH=. python3 -m unittest discover -s tests   # Python 3.8 o
 ```
 
 The tests use a local fake server, so they need no key and make no searches.
+
+## Diagnostics
+
+For setup, errors, request IDs, billing confirmation, and safe bug reports, see [Troubleshooting](docs/TROUBLESHOOTING.md). [Actions](https://github.com/Clypmint/clypmint-broll/actions) reports repository checks; it does not measure hosted API uptime.
 
 ## Contributing and security
 

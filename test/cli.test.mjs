@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { createServer } from 'node:http';
+import { once } from 'node:events';
 
 import { clipOf } from '../src/cli.mjs';
 import { createClient, BrollError } from '../src/client.mjs';
@@ -39,6 +41,28 @@ test('search passes --rights through to the API body', async () => {
   const client = createClient({ apiKey: 'cm_live_x', baseUrl: 'https://example.test', fetch });
   await client.search({ query: 'Wolf of Wall Street', rights: 'any' });
   assert.equal(calls[0].rights, 'any');
+});
+
+test('API errors expose a request ID without including a raw non-JSON response', async () => {
+  const client = createClient({ apiKey: 'test-key', fetch: async () => new Response('private upstream response', { status: 502, headers: { 'x-request-id': 'request-test-123' } }) });
+  await assert.rejects(client.usage(), (error) => error instanceof BrollError && error.requestId === 'request-test-123' && !error.message.includes('private upstream response'));
+});
+
+test('authenticated requests never follow a redirect or send a key to its destination', async (t) => {
+  let destinationCalls = 0;
+  const destination = createServer((request, response) => { destinationCalls++; response.end('{}'); });
+  destination.listen(0, '127.0.0.1');
+  await once(destination, 'listening');
+  const source = createServer((request, response) => {
+    response.writeHead(302, { location: `http://127.0.0.1:${destination.address().port}/collect` });
+    response.end();
+  });
+  source.listen(0, '127.0.0.1');
+  await once(source, 'listening');
+  t.after(() => { source.closeAllConnections(); source.close(); destination.closeAllConnections(); destination.close(); });
+  const client = createClient({ apiKey: 'test-key', baseUrl: `http://127.0.0.1:${source.address().port}` });
+  await assert.rejects(client.usage());
+  assert.equal(destinationCalls, 0);
 });
 
 test('get cuts the moment the search found, unless --start or --duration say otherwise', () => {

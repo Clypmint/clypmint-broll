@@ -40,6 +40,10 @@ These win over anything else in this file.
 | `examples/` | Runnable examples, tested by `test/examples.test.mjs` |
 | `bench/v1/` | B-Roll Bench v1 |
 
+## Repository presentation
+
+Use commit and pull-request titles that describe the change without private names, assistant chatter, or internal planning language. Preserve published history. Keep the README focused on installation, capabilities, verification, and support. Never describe a scan as proof of perfect security.
+
 ## Tests
 
 ```bash

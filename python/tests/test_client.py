@@ -12,6 +12,11 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         Handler.seen.append((self.path, self.headers["Authorization"], self.headers.get("Idempotency-Key"), body))
+        if body.get("query") == "redirect":
+            self.send_response(302)
+            self.send_header("Location", "http://127.0.0.1:%d/collect" % self.server.server_port)
+            self.end_headers()
+            return
         if body.get("query") == "broke":
             self.send_response(402)
             payload = {"error": {"code": "free_allowance_used", "message": "used"}}
@@ -19,8 +24,15 @@ class Handler(BaseHTTPRequestHandler):
             self.send_response(200)
             payload = {"results": [{"score": 9}]}
         self.send_header("Content-Type", "application/json")
+        self.send_header("x-request-id", "request-test-123")
         self.end_headers()
         self.wfile.write(json.dumps(payload).encode())
+
+    def do_GET(self):
+        Handler.seen.append((self.path, self.headers.get("Authorization")))
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'{}')
 
     def log_message(self, *args):
         pass
@@ -36,6 +48,7 @@ class ClientTest(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.server.shutdown()
+        cls.server.server_close()
 
     def test_search_sends_key_body_and_idempotency(self):
         r = self.broll.search("Sam Altman", type="image", idempotency_key="abc12345")
@@ -53,6 +66,15 @@ class ClientTest(unittest.TestCase):
         with self.assertRaises(BrollError) as caught:
             self.broll.search("broke")
         self.assertEqual((caught.exception.status, caught.exception.code), (402, "free_allowance_used"))
+        self.assertEqual(caught.exception.request_id, "request-test-123")
+
+    def test_redirect_does_not_forward_credentials(self):
+        before = len(Handler.seen)
+        with self.assertRaises(BrollError) as caught:
+            self.broll.search("redirect")
+        self.assertEqual(caught.exception.code, "unsafe_redirect")
+        self.assertEqual(len(Handler.seen), before + 1)
+        self.assertFalse(any(item[0] == "/collect" for item in Handler.seen))
 
 
 if __name__ == "__main__":

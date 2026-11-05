@@ -7,11 +7,12 @@
 export const DEFAULT_BASE_URL = 'https://clypmint.com';
 
 export class BrollError extends Error {
-  constructor(status, code, message) {
+  constructor(status, code, message, requestId = null) {
     super(message);
     this.name = 'BrollError';
     this.status = status;
     this.code = code;
+    this.requestId = requestId;
   }
 }
 
@@ -26,6 +27,8 @@ export function createClient({
   async function call(method, path, body, { idempotencyKey } = {}) {
     const response = await fetchImpl(`${baseUrl}${path}`, {
       method,
+      // Credentials belong only to the configured API, never a redirect target.
+      redirect: 'error',
       headers: {
         authorization: `Bearer ${apiKey}`,
         ...(body ? { 'content-type': 'application/json' } : {}),
@@ -39,10 +42,10 @@ export function createClient({
     try {
       data = text ? JSON.parse(text) : {};
     } catch {
-      throw new BrollError(response.status, 'bad_response', text.slice(0, 200) || response.statusText);
+      throw new BrollError(response.status, 'bad_response', response.statusText || 'Invalid API response', response.headers.get('x-request-id'));
     }
     if (!response.ok)
-      throw new BrollError(response.status, data?.error?.code ?? 'error', data?.error?.message ?? response.statusText);
+      throw new BrollError(response.status, data?.error?.code ?? 'error', data?.error?.message ?? response.statusText, response.headers.get('x-request-id') ?? data?.request_id ?? null);
     return data;
   }
 

@@ -15,13 +15,12 @@ named.
   your machine.
 - **Your key.** The Claude Code plugin keeps it in your system's secure store. The Codex plugin, the CLI and the
   clients read it from `CLYPMINT_API_KEY` and send it only to clypmint.com, or to the `CLYPMINT_API_URL` you set.
-  Nothing here prints the key or writes it to disk.
+  Nothing here intentionally prints the key or writes it to disk. The default-branch clients reject API redirects so credentials stay at the configured destination.
 - **The CLI works on your machine.** It runs ffmpeg, yt-dlp and a headless browser with argument lists, never through a
   shell, and puts `--` before every URL it hands to yt-dlp. The browser starts with a fresh, empty profile, so your
   logins and cookies are never used. Files are written only where you say (`--out`) or in the current folder.
 - **No dependencies.** The JavaScript package has no npm dependencies. The Python client uses only the standard library.
-- **The search runs on our servers.** This repository holds no server code and no secrets. Reading it does not help
-  anyone reach your account or anyone else's.
+- **The search runs on our servers.** This repository holds no server code and no secrets. Repository visibility is not an account-security guarantee; report suspected access-control issues privately.
 - **Commands from the API.** A video shot comes with `cut_command` (one shell-quoted line) and `cut_args` (the same
   command as an argument list). Programs that run it should use `cut_args` and spawn without a shell.
 
