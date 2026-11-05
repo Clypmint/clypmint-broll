@@ -17,10 +17,17 @@ DEFAULT_BASE_URL = "https://clypmint.com"
 
 
 class BrollError(Exception):
-    def __init__(self, status, code, message):
+    def __init__(self, status, code, message, request_id=None):
         super().__init__(message)
         self.status = status
         self.code = code
+        self.request_id = request_id
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        # urllib otherwise forwards Authorization to the redirect destination.
+        return None
 
 
 class Broll:
@@ -30,6 +37,7 @@ class Broll:
             raise BrollError(401, "unauthorized", "Set CLYPMINT_API_KEY (get one at https://clypmint.com/broll/dashboard).")
         self.base_url = (base_url or os.environ.get("CLYPMINT_API_URL") or DEFAULT_BASE_URL).rstrip("/")
         self.timeout = timeout
+        self._opener = urllib.request.build_opener(_NoRedirect())
 
     def _call(self, method, path, body=None, idempotency_key=None):
         headers = {"Authorization": "Bearer " + self.api_key, "User-Agent": "clypmint-broll-python/" + __version__}
@@ -41,14 +49,19 @@ class Broll:
             headers["Idempotency-Key"] = idempotency_key
         request = urllib.request.Request(self.base_url + path, data=data, headers=headers, method=method)
         try:
-            with urllib.request.urlopen(request, timeout=self.timeout) as response:
+            with self._opener.open(request, timeout=self.timeout) as response:
                 return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as error:
             try:
-                payload = json.loads(error.read().decode("utf-8")).get("error", {})
+                data = json.loads(error.read().decode("utf-8"))
+                payload = data.get("error", {})
             except Exception:
+                data = {}
                 payload = {}
-            raise BrollError(error.code, payload.get("code", "error"), payload.get("message", str(error)))
+            request_id = error.headers.get("x-request-id") or data.get("request_id")
+            if 300 <= error.code < 400:
+                raise BrollError(error.code, "unsafe_redirect", "The API redirected the request; credentials were not forwarded.", request_id) from None
+            raise BrollError(error.code, payload.get("code", "error"), payload.get("message", "API request failed"), request_id) from None
 
     def search(self, query, context=None, type=None, orientation=None, limit=None, min_score=None, rights=None, keywords=None, names=None, look_for=None, idempotency_key=None):
         """One subject (and the script line it plays over) -> verified shots, best first.
