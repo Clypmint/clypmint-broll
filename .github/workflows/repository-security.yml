@@ -37,10 +37,18 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/gitleaks" dir . --redact=100 --no-banner
+          "$RUNNER_TEMP/gitleaks" dir . --redact=100 --no-banner --report-format json --report-path "$RUNNER_TEMP/gitleaks-current.json"
           if [[ "$BASE_SHA" =~ ^[0-9a-f]{40}$ && "$BASE_SHA" != 0000000000000000000000000000000000000000 ]]; then
-            "$RUNNER_TEMP/gitleaks" git . --log-opts="${BASE_SHA}..HEAD" --redact=100 --no-banner
+            "$RUNNER_TEMP/gitleaks" git . --log-opts="${BASE_SHA}..HEAD" --redact=100 --no-banner --report-format json --report-path "$RUNNER_TEMP/gitleaks-commits.json"
           fi
+      - name: Retain redacted findings
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: secret-scan-${{ github.run_id }}
+          path: ${{ runner.temp }}/gitleaks-*.json
+          if-no-files-found: ignore
+          retention-days: 7
   workflows:
     name: Workflow validation
     runs-on: ubuntu-24.04
