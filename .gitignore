@@ -3,3 +3,16 @@ node_modules/
 .DS_Store
 __pycache__/
 *.pyc
+
+# Local credentials and private signing material
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account*.json
