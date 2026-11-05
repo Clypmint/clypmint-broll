@@ -20,16 +20,16 @@ named.
   shell, and puts `--` before every URL it hands to yt-dlp. The browser starts with a fresh, empty profile, so your
   logins and cookies are never used. Files are written only where you say (`--out`) or in the current folder.
 - **No dependencies.** The JavaScript package has no npm dependencies. The Python client uses only the standard library.
-- **The search runs on our servers.** This repository holds no server code and no secrets. Repository visibility is not an account-security guarantee; report suspected access-control issues privately.
+- **The search runs on our servers.** This repository contains clients, integrations and the benchmark; the hosted search engine is separate. Report suspected access-control issues privately.
 - **Commands from the API.** A video shot comes with `cut_command` (one shell-quoted line) and `cut_args` (the same
   command as an argument list). Programs that run it should use `cut_args` and spawn without a shell.
 
 ## How releases are protected
 
-- Install a pinned release, like `#v1.2.1`. Release tags here are locked: no one, us included, can move or delete
-  them, and every new GitHub release is immutable.
+- Install a pinned release, like `#v1.2.1`. A repository tag ruleset blocks updates and deletions of published `v*` tags.
 - `main` changes only through pull requests. Every pull request runs the tests and a secret scan (gitleaks), and GitHub
-  secret scanning blocks any push that contains a key.
+  push protection blocks recognized supported secret patterns. The custom Clypmint-key rule runs in gitleaks CI;
+  it is not native GitHub push protection.
 - The CI's GitHub Actions are pinned to commits, read the repository only, and are kept current by Dependabot.
 
 ## If your key leaks
